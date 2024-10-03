@@ -1,7 +1,4 @@
 const config = {
-    content: [
-        './app/**/*.{html,ts,tsx,js,jsx,vue}',
-    ],
     theme: {
         extend: {
             colors: {
@@ -10,6 +7,11 @@ const config = {
                 "light": "#e0fbfc",
                 "peach": "#ee6c4d",
                 "dark": "#293241"
+            },
+            fontFamily: {
+                'mulish': ['"Mulish"', 'sans-serif'],
+                'serif': ['"DM Serif Display"', 'serif'],
+                'sans': ['"DM Sans"', 'sans-serif'],
             }
         },
     },
