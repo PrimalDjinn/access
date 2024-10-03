@@ -1,6 +1,6 @@
 import type { UserCookie } from "~~/types"
 
-function collapse(val: any){
+export function collapseStr(val: any){
     if (typeof val !== "string") return val
     switch(true){
         case val === "":
@@ -39,7 +39,7 @@ export class User {
 
     static get authToken(): string | null {
         const token = useUser().value?.token
-        if (!collapse(token)) return this.authCookie
+        if (!collapseStr(token)) return this.authCookie
         return token
     }
 
@@ -50,7 +50,13 @@ export class User {
      */
     static get authCookie() {
         const cookie = useCookie<UserCookie>("auth").value
-        if (!collapse(cookie)) return null
+        if (!collapseStr(cookie)) return null
         return cookie
+    }
+
+    static get profilePicture() {
+        const pic = useUser().value?.pic
+        if (!collapseStr(pic)) return '/images/profile.png'
+        return pic
     }
 }
