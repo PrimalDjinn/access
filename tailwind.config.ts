@@ -12,6 +12,7 @@ const config = {
                 'mulish': ['"Mulish"', 'sans-serif'],
                 'serif': ['"DM Serif Display"', 'serif'],
                 'sans': ['"DM Sans"', 'sans-serif'],
+                'mono': ['"DM Mono"', 'monospace'],
             }
         },
     },

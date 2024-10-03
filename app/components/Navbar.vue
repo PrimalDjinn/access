@@ -1,6 +1,6 @@
 <template>
     <div class="w-full flex justify-center items-center text-dark">
-        <nav class="flex w-10/12 justify-center items-center border-sky border text-lg px-3 py-1 mt-4 bg-white rounded navbar">
+        <nav class="flex w-10/12 justify-between items-center border-sky border text-lg px-3 py-1 mt-4 bg-white rounded isolate relative navbar">
             <div>
                 <svg class="h-12" viewBox="0 0 65 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -8,7 +8,7 @@
                         fill="#3D5A80" />
                 </svg>
             </div>
-            <ul class="flex justify-center w-full font-serif gap-x-20 items-center text-xl">
+            <ul class="flex justify-center w-full font-serif gap-x-20 items-center text-xl -z-10 absolute">
                 <li>
                     <NuxtLink to="/">Home</NuxtLink>
                 </li>
