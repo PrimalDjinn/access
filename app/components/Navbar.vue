@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex justify-center items-center text-dark">
+    <div class="w-full flex justify-center items-center text-dark z-10">
         <nav class="flex w-10/12 justify-between items-center border-sky border text-lg px-3 py-1 mt-4 bg-white rounded isolate relative navbar">
             <div>
                 <svg class="h-12" viewBox="0 0 65 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
                 </li>
                 <li>
                     <NuxtLink to="/">
-                        <span class="uppercase text-3xl">Access.</span>
+                        <span class="uppercase text-3xl">a11y.</span>
                     </NuxtLink>
                 </li>
                 <li>
