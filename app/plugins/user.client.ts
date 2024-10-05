@@ -19,6 +19,7 @@ export default defineNuxtPlugin(async () => {
                 console.error(error)
             },
             onResponse ({response}) {
+                if (!response.ok) return
                 const data = response._data
                 user.value.email = data.user.email
                 user.value.ulid = data.user.ulid

@@ -1,5 +1,5 @@
 <template>
-  <Title>Login</Title>
+  <Title>Reset Password</Title>
   <div class="wrapper"></div>
   <div class="border border-sky bg-light/20 rounded-2xl w-[600px] m-auto mt-20 p-10 shadow-md shadow-sky">
     <form @submit.prevent class="flex flex-col gap-8">
