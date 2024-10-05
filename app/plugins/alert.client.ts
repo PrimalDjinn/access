@@ -1,4 +1,4 @@
-import type { NotificationOptions} from "~~/types";
+import type { NotificationOptions } from "~~/types";
 
 class Notification {
     private readonly notificationElement: HTMLDivElement | null = null;
@@ -16,7 +16,7 @@ class Notification {
 
     private createNotification(): HTMLDivElement {
         const notification = document.createElement('div');
-        notification.classList.add('flex', 'items-center', 'justify-between', 'rounded-md', 'p-4', 'w-1/3', 'min-w-96', 'backdrop-blur', 'opening');
+        notification.classList.add('flex', 'items-center', 'justify-between', 'rounded-md', 'p-4', 'w-1/3', 'min-w-96', 'backdrop-blur', 'notification', 'opening');
         notification.classList.add(this.intensity);
 
         const content = this.createContent();
@@ -78,6 +78,14 @@ class Notification {
         return div
     }
 
+    private get shownTip(): boolean {
+        return localStorage.getItem('shownNotificationTip') === 'true';
+    }
+
+    private set shownTip(value: boolean) {
+        localStorage.setItem('shownNotificationTip', value ? 'true' : 'false');
+    }
+
     private createCloseButton(): HTMLElement {
         const button = document.createElement('div');
         button.classList.add('cursor-pointer', 'hover:bg-light', 'rounded-full', 'p-1');
@@ -88,6 +96,27 @@ class Notification {
                             d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
                             fill="black" />
             </svg>`;
+        if (!this.shownTip) {
+            const tooltip = document.createElement('div');
+            tooltip.innerHTML = 'Tip: Press <code>escape</code> to close';
+            tooltip.style.zIndex = '100';
+            tooltip.style.display = 'none';
+            tooltip.classList.add('absolute', 'text-xs', 'bg-dark', 'text-light', 'rounded-md', 'px-2', 'py-1', 'z-10', 'opacity-90');
+            button.addEventListener("mouseenter", () => {
+                const { x, y } = button.getBoundingClientRect();
+                tooltip.style.top = `${y - 30}px`;
+                tooltip.style.left = `${x}px`;
+                tooltip.style.display = 'block';
+
+                setTimeout(() => {
+                    tooltip.style.display = 'none';
+                }, 1500)
+            })
+            document.body.appendChild(tooltip);
+            window.addEventListener('close', () => {
+                this.shownTip = true;
+            })
+        }
 
         return button;
     }
@@ -127,16 +156,18 @@ class Notification {
 }
 
 export default defineNuxtPlugin(() => {
+    const $alert = (message: string, options?: {
+        timeout?: number | 'never';
+        intensity?: 'info' | 'success' | 'error';
+    }) => {
+        new Notification(message, options);
+    }
+
     Object.defineProperty(window, 'alert', {
         configurable: false,
         enumerable: false,
         writable: false,
-        value: (message: string, options?: {
-            timeout?: number | 'never';
-            intensity?: 'info' | 'success' | 'error';
-        }) => {
-            new Notification(message, options);
-        }
+        value: $alert
     });
 
     Object.defineProperty(window, 'alertError', {
@@ -146,7 +177,7 @@ export default defineNuxtPlugin(() => {
         value: (message: string, options?: {
             timeout?: number | 'never';
         }) => {
-            new Notification(message, {...options, intensity: 'error'});
+            new Notification(message, { ...options, intensity: 'error' });
         }
     });
 
@@ -157,7 +188,7 @@ export default defineNuxtPlugin(() => {
         value: (message: string, options?: {
             timeout?: number | 'never';
         }) => {
-            new Notification(message, {...options, intensity: 'success'});
+            new Notification(message, { ...options, intensity: 'success' });
         }
     });
 
@@ -168,7 +199,25 @@ export default defineNuxtPlugin(() => {
         value: (message: string, options?: {
             timeout?: number | 'never';
         }) => {
-            new Notification(message, {...options, intensity: 'info'});
+            new Notification(message, { ...options, intensity: 'info' });
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            const notificationDock = document.querySelector('#notification-dock');
+            if (!notificationDock) return;
+
+            const notifications = Array.from(notificationDock.children);
+            if (notifications.length === 0) return;
+
+            const notification = notifications[0];
+            if (notification!.classList.contains('closing')) return;
+            notification!.classList.remove('opening');
+            notification!.classList.add('closing');
+            setTimeout(() => {
+                notification!.remove();
+            }, 500);
         }
     });
 });
