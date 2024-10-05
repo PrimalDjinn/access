@@ -35,7 +35,7 @@ class Notification {
         const icon = this.createIcon();
         const messageElement = document.createElement('p');
         messageElement.classList.add('text-dark');
-        messageElement.textContent = this.message;
+        messageElement.innerHTML = this.message;
 
         contentWrapper.appendChild(icon);
         contentWrapper.appendChild(messageElement);
@@ -189,17 +189,6 @@ export default defineNuxtPlugin(() => {
             timeout?: number | 'never';
         }) => {
             new Notification(message, { ...options, intensity: 'success' });
-        }
-    });
-
-    Object.defineProperty(window, 'alertInfo', {
-        configurable: false,
-        enumerable: false,
-        writable: false,
-        value: (message: string, options?: {
-            timeout?: number | 'never';
-        }) => {
-            new Notification(message, { ...options, intensity: 'info' });
         }
     });
 

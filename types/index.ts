@@ -12,3 +12,15 @@ export type NotificationOptions = {
 };
 
 export type UserCookie = string | null
+
+
+export interface ValidationError {
+    validation?: string;
+    code: string;
+    message: string;
+    path: string[];
+    minimum?: number;
+    type?: string;
+    inclusive?: boolean;
+    exact?: boolean;
+}

@@ -1,5 +1,6 @@
 import type {Drizzle} from "~~/server/db/types";
 
+
 export default defineNuxtPlugin(async () => {
     if (!User.authToken) return
 

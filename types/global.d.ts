@@ -20,8 +20,8 @@ declare global {
         MergeTypes<TypesArray>> = TypesArray extends [infer Head, ...infer Rem]
             ? OneOf<Rem, Res | OnlyFirst<Head, AllProperties>, AllProperties>
             : Res;
-
-    interface Window {
-        alert: (message: string, options: NotificationOptions) => void
-    }
+    
+    var alert: (message: string, options: NotificationOptions) => void
+    var alertError: (message: string, options?: Pick<NotificationOptions, 'timeout'>) => void
+    var alertSuccess: (message: string, options: Pick<NotificationOptions, 'timeout'>) => void
 }

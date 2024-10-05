@@ -24,13 +24,12 @@ const { execute } = await useFetch("/api/auth/register", {
   watch: false,
   immediate: false,
   onResponseError({response}) {
-    console.log(response)
+    alertError(unWrapFetchError(response, true))
   },
   onRequestError({error}) {
-    console.log(error)
+    alertError(error.message)
   },
   onResponse({response}){
-    console.log(response)
     if(!response.ok) return
     
   }
