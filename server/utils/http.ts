@@ -13,7 +13,7 @@ export function useController(folderName: string, router: Router) {
 export function createResponse({statusCode = 200, data, headers, statusMessage}: {
     statusCode?: number;
     statusMessage?: string;
-    data: any,
+    data?: any,
     headers?: Record<string, string>
 }) {
     let inferred: Record<string, string> = {}

@@ -3,7 +3,7 @@ export interface UserState {
     name: string
     email: string
     token: string
-    pic: string
+    picture: string
 }
 
 export type UserCookie = string | null

@@ -5,12 +5,13 @@ import {ulid} from "ulid";
 import {v4} from "uuid";
 import {getUserByEmail, getUserByUlid} from "~~/server/mfc/users/queries";
 
-export async function revokeToken(_token: string) {
-    return db.delete(token).where(eq(token.value, _token))
+export async function revokeToken(_token: string)
+{
+    db.delete(token).where(eq(token.value, _token))
 }
 
 export async function revokeTokens(userUlid: string) {
-    return db.delete(token).where(eq(token.userUlid, userUlid))
+    db.delete(token).where(eq(token.userUlid, userUlid))
 }
 
 export async function createToken(data: { userUlid?: string, email?: string }) {

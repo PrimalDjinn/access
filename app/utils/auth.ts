@@ -55,7 +55,7 @@ export class User {
     }
 
     static get profilePicture() {
-        const pic = useUser().value?.pic
+        const pic = useUser().value?.picture
         if (!collapseStr(pic)) return '/images/profile.png'
         return pic
     }

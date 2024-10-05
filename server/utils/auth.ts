@@ -30,3 +30,8 @@ export function readAuthToken(event: H3Event) {
 
     return token
 }
+
+export function clearAuthToken(event: H3Event) {
+    event.headers.delete("Authorization")
+    deleteCookie(event, "Authorization")
+}

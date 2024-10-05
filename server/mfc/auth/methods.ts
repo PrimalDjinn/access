@@ -1,7 +1,8 @@
-import {createToken, revokeToken, revokeTokens} from "./queries"
+import {createToken, revokeToken} from "./queries"
 import type {H3Event} from "h3"
-import {getUserByEmail, getUserByToken} from "~~/server/mfc/users/queries";
+import {getUserByEmail, getUserByToken} from "../users/queries";
 import {hash} from "node:crypto"
+import type {Drizzle} from "~~/server/db/types";
 
 function hashPassword(password: string): string {
     return hash("sha256", password)
@@ -21,8 +22,8 @@ export async function revokeAuthToken(event: H3Event) {
 
 async function reValidateToken(token: string) {
     const fail = {
-        user: null,
-        token: null
+        user: undefined,
+        token: undefined
     }
     const user = await getUserByToken(token)
     if (!user) return fail
@@ -36,12 +37,12 @@ export async function authenticate(user: {
     email?: string,
     password?: string,
     token?: string
-}) {
+}) : Promise<{user?: Drizzle.User.select; token?: string}>{
     if (user.token) return reValidateToken(user.token)
 
     const fail = {
-        user: null,
-        token: null
+        user: undefined,
+        token: undefined
     }
     if (!(user.email && user.password)) return fail
 
