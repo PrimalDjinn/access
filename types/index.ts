@@ -6,4 +6,9 @@ export interface UserState {
     picture: string
 }
 
+export type NotificationOptions = {
+    timeout?: number | 'never';
+    intensity?: 'info' | 'success' | 'error';
+};
+
 export type UserCookie = string | null

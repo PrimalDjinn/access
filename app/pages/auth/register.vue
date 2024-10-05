@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const mismatch = ref(false)
+
 const data = reactive({
   email: '',
   password1: '',
@@ -29,8 +30,9 @@ const { execute } = await useFetch("/api/auth/register", {
     console.log(error)
   },
   onResponse({response}){
+    console.log(response)
     if(!response.ok) return
-    const data = response._data
+    
   }
 })
 

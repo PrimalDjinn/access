@@ -1,3 +1,5 @@
+import type {NotificationOptions} from "~~/types";
+
 type MergeTypes<TypesArray extends any[], Res = {}> =
     TypesArray extends [infer Head, ...infer Rem]
         ? MergeTypes<Rem, Res & Head>
@@ -18,4 +20,8 @@ declare global {
         MergeTypes<TypesArray>> = TypesArray extends [infer Head, ...infer Rem]
             ? OneOf<Rem, Res | OnlyFirst<Head, AllProperties>, AllProperties>
             : Res;
+
+    interface Window {
+        alert: (message: string, options: NotificationOptions) => void
+    }
 }

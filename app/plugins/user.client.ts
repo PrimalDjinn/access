@@ -1,10 +1,10 @@
-import type { Drizzle } from "~~/server/db/types";
+import type {Drizzle} from "~~/server/db/types";
 
 export default defineNuxtPlugin(async () => {
-    if(!User.authToken) return
+    if (!User.authToken) return
 
     const user = useUser()
-    if (!hasOwnProperties(user.value, ["email", "ulid", "token"], false)){
+    if (!hasOwnProperties(user.value, ["email", "ulid", "token"], false)) {
         await useFetch<{
             user: Drizzle.User.select,
             token: string
@@ -12,13 +12,13 @@ export default defineNuxtPlugin(async () => {
             headers: {
                 Authorization: `Bearer ${User.authToken}`
             },
-            onRequestError(error) {
-                console.error(error)
+            onRequestError({error}) {
+                alertError(error?.message || "An unknown error occurred")
             },
-            onResponseError(error){
-                console.error(error)
+            onResponseError({error}) {
+                alertError(error?.message || "An unknown error occurred")
             },
-            onResponse ({response}) {
+            onResponse({response}) {
                 if (!response.ok) return
                 const data = response._data
                 user.value.email = data.user.email
@@ -27,7 +27,7 @@ export default defineNuxtPlugin(async () => {
                 User.authToken = data.token
                 user.value.picture = data.user.picture
             }
-        })   
+        })
     }
 
     console.log("User is authenticated")
