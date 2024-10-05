@@ -21,7 +21,7 @@ for each row execute function updated_at();
 create table if not exists tokens (
     ulid varchar(26) primary key,
     user_ulid varchar(26) not null references users(ulid),
-    value text not null,
+    value varchar(255) not null unique,
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp
 );

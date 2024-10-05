@@ -1,7 +1,7 @@
 <template>
   <Title>Login</Title>
   <div class="wrapper"></div>
-  <div class="border border-sky bg-light/20 rounded-2xl w-[600px] m-auto mt-20 p-10">
+  <div class="border border-sky bg-light/20 rounded-2xl w-[600px] m-auto mt-20 p-10 shadow-md shadow-sky">
     <form @submit.prevent class="flex flex-col gap-8">
       <div>
         <h2 class="text-lg uppercase font-serif">a11y.</h2>
@@ -24,12 +24,6 @@
         Don't have an account?
         <NuxtLink to="/auth/register" class="text-dark font-bold hover:underline">Register</NuxtLink>
       </p>
-      <Notification>
-        Message
-      </Notification>
-      <Notification>
-        Message 2 32
-      </Notification>
     </form>
   </div>
 </template>
@@ -43,6 +37,11 @@
   min-width: 100vw;
   min-height: 100vh;
   background: radial-gradient(100.76% 179.14% at -2.4% -2.78%, #FFFFFF 25.3%, #E0FBFC 100%)
+}
+
+.shadow-md.shadow-sky{
+  box-shadow: 2px 4px 10px rgba(152, 193, 217, 0.25);
+  backdrop-filter: blur(10px);
 }
 </style>
 <script setup lang="ts">
