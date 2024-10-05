@@ -9,6 +9,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
   css: [
-    '~~/assets/scss/fonts.scss',
+    '~/assets/scss/fonts.scss',
   ]
 })

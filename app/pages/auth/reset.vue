@@ -27,6 +27,9 @@
       <Notification>
         Message
       </Notification>
+      <Notification>
+        Message 2 32
+      </Notification>
     </form>
   </div>
 </template>
