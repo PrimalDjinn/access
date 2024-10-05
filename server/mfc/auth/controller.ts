@@ -1,6 +1,8 @@
 import { z } from "zod"
 
-export default defineEventHandler(async event => {
+const router = createRouter()
+
+router.post("/register", defineEventHandler(async event => {
     const schema = z.object({
         email: z.string().email().trim(),
         password: z.string().min(8)
@@ -12,4 +14,6 @@ export default defineEventHandler(async event => {
         message: error?.message,
         data: error?.errors
     })
-})
+}))
+
+export default router

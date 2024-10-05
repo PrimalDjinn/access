@@ -1,3 +1,6 @@
+<script setup lang="ts">
+
+</script>
 <template>
   <Title>Login</Title>
   <div class="wrapper"></div>

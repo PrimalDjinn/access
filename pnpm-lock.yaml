@@ -10,13 +10,13 @@ importers:
     dependencies:
       drizzle-orm:
         specifier: ^0.33.0
-        version: 0.33.0(postgres@3.4.4)
+        version: 0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4)
       google-auth-library:
         specifier: ^9.14.1
         version: 9.14.1
       nuxt:
         specifier: ^3.13.0
-        version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))
+        version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))
       postgres:
         specifier: ^3.4.4
         version: 3.4.4
@@ -36,6 +36,9 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@electric-sql/pglite':
+        specifier: ^0.2.10
+        version: 0.2.10
       '@nuxtjs/tailwindcss':
         specifier: ^6.12.1
         version: 6.12.1(magicast@0.3.5)(rollup@4.23.0)
@@ -228,6 +231,9 @@ packages:
 
   '@drizzle-team/brocli@0.10.1':
     resolution: {integrity: sha512-AHy0vjc+n/4w/8Mif+w86qpppHuF3AyXbcWW+R/W7GNA3F5/p2nuhlkCJaTXSLZheB4l1rtHzOfr9A7NwoR/Zg==}
+
+  '@electric-sql/pglite@0.2.10':
+    resolution: {integrity: sha512-0TJF/1ouBweCtyZC4oHwx+dHGn/lP16KfEO/3q22RDuZUsV2saTuYAwb6eK3gBLzVdXG4dj4xZilvmBYEM/WQg==}
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
@@ -4344,6 +4350,8 @@ snapshots:
 
   '@drizzle-team/brocli@0.10.1': {}
 
+  '@electric-sql/pglite@0.2.10': {}
+
   '@esbuild-kit/core-utils@3.3.2':
     dependencies:
       esbuild: 0.18.20
@@ -5830,9 +5838,9 @@ snapshots:
 
   csstype@3.1.3: {}
 
-  db0@0.1.4(drizzle-orm@0.33.0(postgres@3.4.4)):
+  db0@0.1.4(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4)):
     optionalDependencies:
-      drizzle-orm: 0.33.0(postgres@3.4.4)
+      drizzle-orm: 0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4)
 
   debug@2.6.9:
     dependencies:
@@ -5920,8 +5928,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.33.0(postgres@3.4.4):
+  drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4):
     optionalDependencies:
+      '@electric-sql/pglite': 0.2.10
       postgres: 3.4.4
 
   duplexer@0.1.2: {}
@@ -6829,7 +6838,7 @@ snapshots:
 
   negotiator@0.6.3: {}
 
-  nitropack@2.9.7(drizzle-orm@0.33.0(postgres@3.4.4))(magicast@0.3.5):
+  nitropack@2.9.7(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4))(magicast@0.3.5):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@netlify/functions': 2.8.2
@@ -6852,7 +6861,7 @@ snapshots:
       cookie-es: 1.2.2
       croner: 8.1.2
       crossws: 0.2.4
-      db0: 0.1.4(drizzle-orm@0.33.0(postgres@3.4.4))
+      db0: 0.1.4(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4))
       defu: 6.1.4
       destr: 2.0.3
       dot-prop: 8.0.2
@@ -6962,7 +6971,7 @@ snapshots:
 
   nuxi@3.14.0: {}
 
-  nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1)):
+  nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1)):
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/devtools': 1.5.1(rollup@4.23.0)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))(vue@3.5.10)
@@ -6999,7 +7008,7 @@ snapshots:
       magic-string: 0.30.11
       mlly: 1.7.1
       nanotar: 0.1.1
-      nitropack: 2.9.7(drizzle-orm@0.33.0(postgres@3.4.4))(magicast@0.3.5)
+      nitropack: 2.9.7(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(postgres@3.4.4))(magicast@0.3.5)
       nuxi: 3.14.0
       nypm: 0.3.12
       ofetch: 1.4.0
