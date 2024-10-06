@@ -4,13 +4,14 @@ import {ulid} from "ulid";
 import {eq} from "drizzle-orm";
 
 export async function createUser(data: {email: string, password: string}){
-    const users = await db.insert(user).values({
+    if(!data.email || !data.password) throw new Error("Invalid user creation data")
+    const _ulid = ulid()
+    await db.insert(user).values({
         email: data.email.toLowerCase(),
-        password: data.password,
-        ulid: ulid()
+        password: hashPassword(data.password),
+        ulid: _ulid
     })
-
-    return users.at(0)
+    return getUserByUlid(_ulid)
 }
 
 export async function getUserByEmail(email: string){

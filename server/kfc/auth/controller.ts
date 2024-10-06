@@ -1,13 +1,13 @@
 import {z} from "zod"
 import {createUser} from "../users/queries";
-import {revokeToken} from "../auth/queries";
-import {authenticate} from "./methods";
+import {createToken, revokeToken} from "./queries";
+import {authenticate} from "./functions";
 
 const router = createRouter()
 
 router.post("/register", defineEventHandler(async event => {
     const schema = z.object({
-        email: z.string().email().trim(),
+        email: z.string().email(),
         password: z.string().min(8)
     })
     const {data, error} = await readValidatedBody(event, schema.safeParse)
@@ -17,15 +17,16 @@ router.post("/register", defineEventHandler(async event => {
         data: error?.errors
     })
 
-    const user = await createUser(data)
-    if (!user) return createError({
+    const user = await createUser(data).catch(e => e as Error)
+    if (!user || user instanceof Error) return createError({
         statusCode: 500,
-        message: "Failed to create user",
+        message: user?.message || "Failed to create user"
     })
+    const {token} = await createToken({userUlid: user.ulid})
 
     return createResponse({
         statusCode: 201,
-        data: user
+        data: { user, token }
     })
 }))
 

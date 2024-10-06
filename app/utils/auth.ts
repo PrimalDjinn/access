@@ -1,8 +1,9 @@
-import type { UserCookie } from "~~/types"
+import type {UserCookie, UserState} from "~~/types"
+import type {Drizzle} from "~~/server/db/types";
 
-export function collapseStr(val: any){
+export function collapseStr(val: any) {
     if (typeof val !== "string") return val
-    switch(true){
+    switch (true) {
         case val === "":
         case val === "null":
             return null
@@ -58,5 +59,16 @@ export class User {
         const pic = useUser().value?.picture
         if (!collapseStr(pic)) return '/images/profile.png'
         return pic
+    }
+
+    static set value(user: Drizzle.User.select) {
+        const _user = useUser()
+        _user.value.email = user.email
+        _user.value.ulid = user.ulid
+        if (user.picture) _user.value.picture = user.picture
+    }
+
+    static get value(): UserState {
+        return useUser().value
     }
 }

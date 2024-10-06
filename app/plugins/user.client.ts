@@ -22,11 +22,8 @@ export default defineNuxtPlugin(async () => {
             onResponse({response}) {
                 if (!response.ok) return
                 const data = response._data
-                user.value.email = data.user.email
-                user.value.ulid = data.user.ulid
-                user.value.token = data.token
+                User.value = data.user
                 User.authToken = data.token
-                user.value.picture = data.user.picture
             }
         })
     }
