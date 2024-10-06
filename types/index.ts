@@ -1,8 +1,8 @@
 export interface UserState {
-    ulid: string
-    email: string
-    token: string
-    picture: string
+    ulid?: string
+    email?: string
+    token?: string
+    picture?: string
 }
 
 export type NotificationOptions = {

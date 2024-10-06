@@ -3,7 +3,7 @@ import { sql } from "drizzle-orm"
 
 export const user = pgTable("users", {
 	ulid: varchar("ulid", { length: 26 }).primaryKey().notNull(),
-	email: varchar("email", { length: 255 }).notNull(),
+	email: varchar("email", { length: 255 }).notNull().unique(),
 	password: varchar("password", { length: 255 }).notNull(),
 	picture: text("picture"),
 	createdAt: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),

@@ -33,7 +33,7 @@ router.post("/register", defineEventHandler(async event => {
 router.post("/login", defineEventHandler(async event => {
     const schema = z.object({
         email: z.string().email().trim(),
-        password: z.string().min(8)
+        password: z.string()
     })
     const {data, error} = await readValidatedBody(event, schema.safeParse)
     if (!data || error) return createError({
@@ -42,15 +42,15 @@ router.post("/login", defineEventHandler(async event => {
         data: error?.errors
     })
 
-    const user = await authenticate(data)
-    if (!user) return createError({
+    const result = await authenticate(data)
+    if (!result) return createError({
         statusCode: 401,
         message: "Invalid email or password"
     })
 
     return createResponse({
         statusCode: 200,
-        data: user
+        data: result
     })
 }))
 

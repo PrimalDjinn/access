@@ -1,32 +1,60 @@
 <script setup lang="ts">
+import type {Drizzle} from "~~/server/db/types";
 
+const loading = ref(false)
+const data = reactive({
+  email: '',
+  password: ''
+})
+
+async function submit(){
+  await $fetch<{
+    user: Drizzle.User.select,
+    token: string
+  }>("/api/auth/login", {
+    method: "POST",
+    body: data,
+    onResponseError({response}){
+      alertError(unWrapFetchError(response, true))
+    },
+    onRequestError({error}){
+      alertError(error.message)
+    },
+    async onResponse({response}){
+      if(!response.ok) return
+      const data = response._data
+      User.value = data.user
+      User.authToken = data.token
+      await navigateTo("/a11y")
+    }
+  })
+}
 </script>
 <template>
   <Title>Login</Title>
   <div class="wrapper"></div>
   <div class="border border-sky bg-light/20 rounded-2xl w-[600px] m-auto mt-20 p-10 shadow-md shadow-sky">
-    <form @submit.prevent class="flex flex-col gap-8">
+    <form @submit.prevent="submit" class="flex flex-col gap-8">
       <div>
         <h2 class="text-lg uppercase font-serif">Access.</h2>
         <h1 class="text-4xl font-sans font-bold">Login</h1>
       </div>
       <div class="flex flex-col gap-1">
         <label for="email" class="font-mono text-lg">Email</label>
-        <input type="email" id="email" placeholder="username@mail.com"
+        <input type="email" id="email" placeholder="username@mail.com" v-model="data.email"
                class="rounded-md px-3 py-2 focus:ring-1 outline-none focus:ring-sky focus:ring-opacity-50 border border-[#bdc6d7]"
                autocomplete="email">
       </div>
       <div class="flex flex-col gap-1">
         <label for="password">Password</label>
-        <input type="password" id="password" autocomplete="current-password"
+        <input type="password" id="password" autocomplete="current-password" v-model="data.password"
                class="rounded-md px-3 py-2 focus:ring-1 outline-none focus:ring-sky focus:ring-opacity-50 border border-[#bdc6d7]">
         <NuxtLink class="text-xs hover:underline font-mulish" to="/auth/reset">Forgot Password?</NuxtLink>
       </div>
       <div>
-        <button type="submit"
-                class="bg-peach w-full text-white rounded-md px-3 py-2 hover:bg-peach/90 transition-colors duration-300 ease-in-out">
-          Sign
-          In
+        <button type="submit" :disabled="loading"
+                class="bg-peach w-full text-white rounded-md px-3 py-2 hover:bg-peach/90 transition-colors duration-300 disabled:cursor-not-allowed ease-in-out">
+          Sign In
         </button>
       </div>
       <p class="text-center text-sm font-mono capitalize">

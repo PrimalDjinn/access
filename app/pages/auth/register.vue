@@ -2,6 +2,7 @@
 import {Drizzle} from "~~/server/db/types";
 
 const mismatch = ref(false)
+const loading = ref(false)
 
 const data = reactive({
   email: '',
@@ -29,11 +30,12 @@ async function submit() {
     onRequestError({error}) {
       alertError(error.message)
     },
-    onResponse({response}) {
+    async onResponse({response}) {
       if (!response.ok) return
-      const data = response._data
-      User.value = data.user
-      User.authToken = data.token
+      const data = response._data;
+      User.value = data.user;
+      User.authToken = data.token;
+      await navigateTo("/a11y")
     }
   })
 }
@@ -65,10 +67,9 @@ async function submit() {
         <small v-if="mismatch" class="text-xs font-mulish text-red-500">Passwords do not match</small>
       </div>
       <div>
-        <button type="submit" :disabled="mismatch"
-                class="bg-peach w-full text-white rounded-md px-3 py-2 hover:bg-peach/90 transition-colors duration-300 ease-in-out">
-          Sign
-          Up
+        <button type="submit" :disabled="mismatch || loading"
+                class="bg-peach w-full text-white rounded-md px-3 py-2 disabled:cursor-not-allowed hover:bg-peach/90 transition-colors duration-300 ease-in-out">
+          Sign Up
         </button>
       </div>
       <p class="text-center text-sm font-mono capitalize">

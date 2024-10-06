@@ -2,6 +2,7 @@ import db from "~~/server/db";
 import {token, user} from "~~/server/db/drizzle/schema";
 import {ulid} from "ulid";
 import {eq} from "drizzle-orm";
+import {hashPassword} from "../auth/functions";
 
 export async function createUser(data: {email: string, password: string}){
     if(!data.email || !data.password) throw new Error("Invalid user creation data")

@@ -5,7 +5,7 @@
     <div class="flex justify-center items-center mt-8 font-bold text-lg gap-x-6">
         <NuxtLink
             class="flex gap-x-2 bg-dark border border-dark rounded-full px-14 py-2 text-white items-center get-started"
-            to="/auth/register">Get Started
+            to="/a11y">Get Started
             <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M13.3019 16L17.4241 12M17.4241 12L13.3019 8M17.4241 12H9.17979M23.6073 12C23.6073 17.5228 18.9934 22 13.3019 22C7.61044 22 2.99658 17.5228 2.99658 12C2.99658 6.47715 7.61044 2 13.3019 2C18.9934 2 23.6073 6.47715 23.6073 12Z"

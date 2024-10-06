@@ -21,7 +21,7 @@ function isClientValidationError(data: any): data is ValidationError {
 }
 
 
-function formatValidationtErrorArray(errorArray: ValidationError[]): string[] {
+function formatValidationErrorArray(errorArray: ValidationError[]): string[] {
     return errorArray.map(error => {
         const field = error.path.join(".");
         const message = error.message;
@@ -40,7 +40,7 @@ function formatErrors(data: any[]) {
             rest.push(datum)
         }
     })
-    const join = formatValidationtErrorArray(validationErrors).join("/n")
+    const join = formatValidationErrorArray(validationErrors).join("/n")
     return `${join}/n${rest.join("/")}`
 }
 
@@ -65,10 +65,11 @@ function formatErrorMessage(message: any) {
 }
 
 export function unWrapFetchError(response: Response & { _data: any } | any, html?: true) {
+    let message = "Unknown error occurred";
     if (response?._data?.message) {
-        var message = formatErrorMessage(response._data.message || response?._data.statusText || response.statusText)
+        message = formatErrorMessage(response._data.message || response?._data.statusText || response.statusText);
     } else if (response?.message) {
-        var message = formatErrorMessage(response.message || response.statusMessage)
+        message = formatErrorMessage(response.message || response.statusMessage);
     } else {
         try {
             var data = JSON.parse(data)
@@ -76,11 +77,11 @@ export function unWrapFetchError(response: Response & { _data: any } | any, html
             return String(response)
         }
 
-        var message = formatErrorMessage(data)
+        message = formatErrorMessage(data);
     }
 
     if (html) {
-        var message = message.replace("/n", "<br>")
+        message = message.replace("/n", "<br>");
     }
 
     return message

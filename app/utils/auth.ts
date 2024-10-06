@@ -31,14 +31,19 @@ export class User {
      * @example
      * User.authToken = "token"
      */
-    static set authToken(token: string) {
+    static set authToken(token: string | null) {
         const cookie = useCookie<UserCookie>("auth")
         const state = useUser().value
-        cookie.value = token
-        state.token = token
+        if (token) {
+            cookie.value = token
+            state.token = token
+        } else {
+            cookie.value = null
+            state.token = undefined
+        }
     }
 
-    static get authToken(): string | null {
+    static get authToken(): string | null | undefined {
         const token = useUser().value?.token
         if (!collapseStr(token)) return this.authCookie
         return token
@@ -61,11 +66,21 @@ export class User {
         return pic
     }
 
-    static set value(user: Drizzle.User.select) {
-        const _user = useUser()
-        _user.value.email = user.email
-        _user.value.ulid = user.ulid
-        if (user.picture) _user.value.picture = user.picture
+    static set value(user: Drizzle.User.select | null) {
+        if (user) {
+            const _user = useUser()
+            _user.value.email = user.email
+            _user.value.ulid = user.ulid
+            if (user.picture) _user.value.picture = user.picture
+        } else {
+            const _user = useUser()
+            _user.value = {
+                email: undefined,
+                ulid: undefined,
+                token: undefined,
+                picture: undefined
+            }
+        }
     }
 
     static get value(): UserState {

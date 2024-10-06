@@ -29,8 +29,8 @@
             </ul>
             <div>
                 <NuxtLink v-if="!User.isAuthenticated" class="bg-navy px-8 py-2 rounded-sm text-white font-bold" to="/auth/login">Login</NuxtLink>
-                <div class="rounded-2xl p-2 text-white font-bold bg-white border-2 border-navy relative overflow-hidden" v-else>
-                    <img :src="User.profilePicture" alt="Profile Picture" class="object-cover h-8 w-10 rounded-full aspect-square grayscale" />
+                <div class="rounded-xl p-[6px] text-white font-bold bg-white border-2 border-navy relative overflow-hidden" v-else>
+                    <img :src="User.profilePicture" alt="Profile Picture" class="object-cover h-8 w-10 rounded-full aspect-square opacity-80 grayscale" />
                     <div class="absolute w-full h-full bg-navy/15 top-0 left-0 hover:bg-transparent transition-colors"></div>
                 </div>
             </div>

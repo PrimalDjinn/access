@@ -1,4 +1,5 @@
 import type {Drizzle} from "~~/server/db/types";
+import consola from "consola";
 
 
 export default defineNuxtPlugin(async () => {
@@ -6,10 +7,7 @@ export default defineNuxtPlugin(async () => {
 
     const user = useUser()
     if (!hasOwnProperties(user.value, ["email", "ulid", "token"], false)) {
-        await useFetch<{
-            user: Drizzle.User.select,
-            token: string
-        }>("/api/users/me", {
+        await useFetch<Drizzle.User.select>("/api/users/me", {
             headers: {
                 Authorization: `Bearer ${User.authToken}`
             },
@@ -17,16 +15,14 @@ export default defineNuxtPlugin(async () => {
                 alertError(error?.message || "An unknown error occurred")
             },
             onResponseError({error}) {
-                alertError(error?.message || "An unknown error occurred")
+                consola.error(error)
+                User.value = null
+                User.authToken = null
             },
             onResponse({response}) {
                 if (!response.ok) return
-                const data = response._data
-                User.value = data.user
-                User.authToken = data.token
+                User.value = response._data
             }
         })
     }
-
-    console.log("User is authenticated")
 });

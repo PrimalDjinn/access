@@ -15,7 +15,7 @@ const credentials = {
 export { credentials };
 
 export default defineConfig({
-    schema: "./db/drizzle/schema.ts",
+    schema: "./server/db/drizzle/schema.ts",
     dialect: "postgresql",
     dbCredentials: credentials,
     verbose: true,

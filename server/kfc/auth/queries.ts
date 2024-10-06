@@ -40,7 +40,7 @@ export async function createToken<T extends CreateTokenData>(data: T) {
         ulid: ulid(),
         userUlid: typeof user === "string" ? user : user.ulid,
         value: _token
-    })
+    }).execute()
 
     return {user: user, token: _token} as CreateTokenReturn<T>
 }
