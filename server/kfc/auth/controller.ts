@@ -54,7 +54,7 @@ router.post("/login", defineEventHandler(async event => {
     })
 }))
 
-router.post("/logout", defineEventHandler(async event => {
+router.post("/logout", defineEventHandler(event => {
     const token = readAuthToken(event)
     clearAuthToken(event)
     if (token) revokeToken(token)

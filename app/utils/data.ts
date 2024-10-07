@@ -1,4 +1,3 @@
-import { except } from "drizzle-orm/mysql-core"
 import type { ValidationError } from "~~/types"
 
 export function hasOwnProperties<T = any>(obj: T, properties: (keyof T)[], allowNullish = true) {
