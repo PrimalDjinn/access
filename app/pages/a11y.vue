@@ -3,39 +3,44 @@
   <div class="isolate">
     <div class="z-10 grid mt-44  grid-cols-1 grid-rows-1">
       <input type="url" v-model="link"
-        class="m-auto w-[800px] max-w-[80%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1" @focusin="showPlaceholder = false" @focusout="revealPlaceholder">
-      <div class="m-auto h-[60px] w-[800px] pointer-events-none flex font-semibold items-center px-4 top-0 left-0 col-start-1 row-start-1 text-dark/50" v-if="showPlaceholder">
-        Enter URL Link
-        <span class="mx-1">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_35_40)">
-              <path
-                d="M8.33326 10.8333C8.69113 11.3118 9.14772 11.7076 9.67205 11.9941C10.1964 12.2806 10.7762 12.4509 11.3721 12.4936C11.9681 12.5363 12.5662 12.4503 13.126 12.2415C13.6858 12.0327 14.1942 11.7059 14.6166 11.2833L17.1166 8.78333C17.8756 7.99749 18.2956 6.94498 18.2861 5.85249C18.2766 4.76 17.8384 3.71495 17.0658 2.94242C16.2933 2.16989 15.2482 1.73168 14.1558 1.72219C13.0633 1.71269 12.0108 2.13267 11.2249 2.89166L9.79159 4.31666M11.6666 9.16666C11.3087 8.68822 10.8521 8.29234 10.3278 8.00588C9.80347 7.71942 9.22367 7.54907 8.62771 7.50638C8.03176 7.4637 7.4336 7.54969 6.8738 7.75851C6.314 7.96733 5.80566 8.2941 5.38326 8.71666L2.88326 11.2167C2.12426 12.0025 1.70429 13.055 1.71378 14.1475C1.72327 15.24 2.16148 16.285 2.93401 17.0576C3.70655 17.8301 4.7516 18.2683 5.84408 18.2778C6.93657 18.2873 7.98908 17.8673 8.77492 17.1083L10.1999 15.6833"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_35_40">
-                <rect width="20" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-        </span>
-        or Repository Link
-        <span class="mx-1">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_34_18)">
-              <path
-                d="M7.50008 15.8333C3.33341 17.0833 3.33341 13.75 1.66675 13.3333M13.3334 18.3333V15.1083C13.3647 14.711 13.311 14.3115 13.1759 13.9365C13.0409 13.5615 12.8275 13.2195 12.5501 12.9333C15.1667 12.6417 17.9167 11.65 17.9167 7.1C17.9165 5.93652 17.469 4.81766 16.6667 3.975C17.0466 2.95709 17.0198 1.83196 16.5917 0.833332C16.5917 0.833332 15.6084 0.541666 13.3334 2.06667C11.4234 1.54902 9.41007 1.54902 7.50008 2.06667C5.22508 0.541666 4.24175 0.833332 4.24175 0.833332C3.81373 1.83196 3.78687 2.95709 4.16675 3.975C3.35852 4.82392 2.91052 5.95288 2.91675 7.125C2.91675 11.6417 5.66675 12.6333 8.28341 12.9583C8.00925 13.2416 7.7978 13.5795 7.66284 13.9499C7.52788 14.3204 7.47242 14.7151 7.50008 15.1083V18.3333"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_34_18">
-                <rect width="20" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-        </span>
-      </div>
+        class="m-auto w-[800px] max-w-[80%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
+        @focusin="showPlaceholder = false" @focusout="revealPlaceholder">
+      <Transition mode="in-out" name="fade">
+        <div
+          class="m-auto h-[60px] w-[800px] pointer-events-none flex font-semibold items-center px-4 top-0 left-0 col-start-1 row-start-1 text-dark/50"
+          v-if="showPlaceholder">
+          Enter URL Link
+          <span class="mx-1">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_35_40)">
+                <path
+                  d="M8.33326 10.8333C8.69113 11.3118 9.14772 11.7076 9.67205 11.9941C10.1964 12.2806 10.7762 12.4509 11.3721 12.4936C11.9681 12.5363 12.5662 12.4503 13.126 12.2415C13.6858 12.0327 14.1942 11.7059 14.6166 11.2833L17.1166 8.78333C17.8756 7.99749 18.2956 6.94498 18.2861 5.85249C18.2766 4.76 17.8384 3.71495 17.0658 2.94242C16.2933 2.16989 15.2482 1.73168 14.1558 1.72219C13.0633 1.71269 12.0108 2.13267 11.2249 2.89166L9.79159 4.31666M11.6666 9.16666C11.3087 8.68822 10.8521 8.29234 10.3278 8.00588C9.80347 7.71942 9.22367 7.54907 8.62771 7.50638C8.03176 7.4637 7.4336 7.54969 6.8738 7.75851C6.314 7.96733 5.80566 8.2941 5.38326 8.71666L2.88326 11.2167C2.12426 12.0025 1.70429 13.055 1.71378 14.1475C1.72327 15.24 2.16148 16.285 2.93401 17.0576C3.70655 17.8301 4.7516 18.2683 5.84408 18.2778C6.93657 18.2873 7.98908 17.8673 8.77492 17.1083L10.1999 15.6833"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_35_40">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          or Repository Link
+          <span class="mx-1">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_34_18)">
+                <path
+                  d="M7.50008 15.8333C3.33341 17.0833 3.33341 13.75 1.66675 13.3333M13.3334 18.3333V15.1083C13.3647 14.711 13.311 14.3115 13.1759 13.9365C13.0409 13.5615 12.8275 13.2195 12.5501 12.9333C15.1667 12.6417 17.9167 11.65 17.9167 7.1C17.9165 5.93652 17.469 4.81766 16.6667 3.975C17.0466 2.95709 17.0198 1.83196 16.5917 0.833332C16.5917 0.833332 15.6084 0.541666 13.3334 2.06667C11.4234 1.54902 9.41007 1.54902 7.50008 2.06667C5.22508 0.541666 4.24175 0.833332 4.24175 0.833332C3.81373 1.83196 3.78687 2.95709 4.16675 3.975C3.35852 4.82392 2.91052 5.95288 2.91675 7.125C2.91675 11.6417 5.66675 12.6333 8.28341 12.9583C8.00925 13.2416 7.7978 13.5795 7.66284 13.9499C7.52788 14.3204 7.47242 14.7151 7.50008 15.1083V18.3333"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_34_18">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+        </div>
+      </Transition>
     </div>
     <div class="fixed bottom-0 left-0 -z-10">
       <svg width="695" height="565" viewBox="0 0 695 565" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,12 +92,28 @@ definePageMeta({
 const showPlaceholder = ref(true)
 const link = ref('')
 
-function revealPlaceholder(){
-  if(!link.value) showPlaceholder.value = true
+function revealPlaceholder() {
+  if (!link.value) showPlaceholder.value = true
 }
 </script>
 <style scoped>
 .custom-shadow {
-  box-shadow: 0px 2px 4px rgba(61, 90, 128, 0.15), inset 0px 2px 4px rgba(188, 190, 192, 0.15);
+  box-shadow: 0px 2px 4px rgba(61, 90, 128, 0.15),
+    inset 0px 2px 4px rgba(188, 190, 192, 0.15);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
 }
 </style>

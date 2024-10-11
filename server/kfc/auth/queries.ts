@@ -7,11 +7,11 @@ import {getUserByEmail} from "~~/server/kfc/users/queries";
 import type {Drizzle} from "~~/server/db/types";
 
 export async function revokeToken(_token: string) {
-    db.delete(token).where(eq(token.value, _token))
+    db.delete(token).where(eq(token.value, _token)).execute()
 }
 
 export async function revokeTokens(userUlid: string) {
-    db.delete(token).where(eq(token.userUlid, userUlid))
+    db.delete(token).where(eq(token.userUlid, userUlid)).execute()
 }
 
 type CreateTokenReturn<T extends CreateTokenData> = T extends CreateTokenDataB ? {
