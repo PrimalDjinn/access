@@ -67,13 +67,12 @@ export class User {
     }
 
     static set value(user: Drizzle.User.select | null) {
+        const _user = useUser()
         if (user) {
-            const _user = useUser()
             _user.value.email = user.email
             _user.value.ulid = user.ulid
             if (user.picture) _user.value.picture = user.picture
         } else {
-            const _user = useUser()
             _user.value = {
                 email: undefined,
                 ulid: undefined,

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-sky/50 backdrop-blur rounded-2xl w-72 p-2 pb-4 flex flex-col justify-between">
+    <div class="bg-sky/50 backdrop-blur rounded-2xl w-72 p-2 pb-4 flex flex-col justify-between max-sm:w-[80vw]">
         <div class="grid place-items-center icon-container">
             <slot name="icon"></slot>
         </div>

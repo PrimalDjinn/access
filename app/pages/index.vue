@@ -1,7 +1,9 @@
 <template>
     <Title>Home</Title>
-    <HomeLanding />
+    <Home />
 </template>
-<script setup>
-
-</script>
+<style scoped>
+body{
+    background-image: url('/images/pattern.svg');
+}
+</style>

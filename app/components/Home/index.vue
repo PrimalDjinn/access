@@ -1,10 +1,10 @@
 <template>
-    <p class="font-sans font-bold text-8xl text-center mt-16 text-dark">
+    <p class="font-sans font-bold text-8xl text-center mt-16 max-sm:mt-12 text-dark max-sm:text-5xl">
         Accessibility <br> Solutions for <br> Web <span class="text-peach">Compliance</span>
     </p>
-    <div class="flex justify-center items-center mt-8 font-bold text-lg gap-x-6">
+    <div class="flex justify-center items-center mt-8 font-bold text-lg gap-x-6 max-sm:flex-col max-sm:gap-2">
         <NuxtLink
-            class="flex gap-x-2 bg-dark border border-dark rounded-full px-14 py-2 text-white items-center get-started"
+            class="flex gap-x-2 bg-dark border border-dark rounded-full px-14 py-2 text-white items-center transition-colors get-started max-sm:w-[260px]"
             to="/a11y">Get Started
             <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -13,7 +13,7 @@
             </svg>
         </NuxtLink>
         <NuxtLink
-            class="flex gap-x-2 px-14 py-2 bg-light rounded-full border border-sky items-center text-dark enterprise"
+            class="flex gap-x-2 px-14 py-2 bg-light rounded-full border border-sky items-center text-dark enterprise max-sm:w-[260px]"
             to="/enterprise">Enterprise
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -22,11 +22,10 @@
             </svg>
         </NuxtLink>
     </div>
-    <p class="text-center mt-4 text-navy font-bold text-xl">
-        Seamlessly Identify and Address Accessibility Barriers <br> Across Any Website
+    <p class="text-center mt-4 text-navy font-bold text-xl max-sm:text-base max-sm:font-extrabold max-sm:leading-5">
+        Seamlessly Identify and Address <br class="sm:hidden"> Accessibility Barriers <br> Across Any Website
     </p>
-    <HomeLandingHighlight />
-    <HomeLandingMask :repeat="6" />
+    <HomeHighlight />
 </template>
 <style lang="scss" scoped>
 .get-started {
