@@ -3,11 +3,11 @@
   <div class="isolate">
     <div class="z-10 grid mt-44  grid-cols-1 grid-rows-1">
       <input type="url" v-model="link"
-        class="m-auto w-[800px] max-w-[80%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
+        class="m-auto w-[800px] max-w-[90%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
         @focusin="showPlaceholder = false" @focusout="revealPlaceholder">
       <Transition mode="in-out" name="fade">
         <div
-          class="m-auto h-[60px] w-[800px] pointer-events-none flex font-semibold items-center px-4 top-0 left-0 col-start-1 row-start-1 text-dark/50"
+          class="m-auto h-[60px] w-[800px] max-w-[90%] pointer-events-none flex font-semibold items-center px-4 top-0 left-0 col-start-1 row-start-1 text-dark/50 max-sm:text-sm"
           v-if="showPlaceholder">
           Enter URL Link
           <span class="mx-1">
@@ -77,7 +77,7 @@
         </defs>
       </svg>
     </div>
-    <div class="fixed bottom-0 right-0 -z-10">
+    <div class="fixed bottom-0 right-0 -z-10 max-sm:opacity-80">
       <svg width="172" height="151" viewBox="0 0 172 151" fill="none" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="171.5" cy="151" rx="171.5" ry="151" fill="#98C1D9" />
       </svg>

@@ -1,9 +1,11 @@
 <template>
     <Title>Home</Title>
-    <Home />
+    <div class="wrapper">
+        <Home />
+    </div>
 </template>
 <style scoped>
-body{
+.wrapper {
     background-image: url('/images/pattern.svg');
 }
 </style>

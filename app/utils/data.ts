@@ -63,7 +63,7 @@ function formatErrorMessage(message: any) {
     return JSON.stringify(data)
 }
 
-export function unWrapFetchError(response: Response & { _data: any } | any, html?: true) {
+export function unWrapFetchError(response: Response & { _data: any } | any, html?: true | 'none') {
     let message = "Unknown error occurred";
     if (response?._data?.message) {
         message = formatErrorMessage(response._data.message || response?._data.statusText || response.statusText);
@@ -80,7 +80,8 @@ export function unWrapFetchError(response: Response & { _data: any } | any, html
     }
 
     if (html) {
-        message = message.replace("/n", "<br>");
+        if (html === 'none') return message.replace("/n", " ")
+        return message.replace("/n", "<br>")
     }
 
     return message

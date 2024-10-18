@@ -50,12 +50,13 @@
                     </div>
                 </div>
             </div>
+            <ul ref="dropdown"
+                class="absolute border px-10 py-1 dropdown text-white bg-navy/80 mt-1 -mr-0.5 rounded-b-md backdrop-blur-lg">
+                <li class="hover:bg-sky/20 w-full transition-colors py-1">
+                    <button @click="logout" v-if="User.isAuthenticated">Log Out</button>
+                </li>
+            </ul>
         </nav>
-        <ul ref="dropdown" class="absolute border px-10 py-1 dropdown text-white bg-navy/80 mt-1 -mr-0.5 rounded-b-md backdrop-blur-lg">
-            <li class="hover:bg-sky/20 w-full transition-colors py-1">
-                <button @click="logout" v-if="User.isAuthenticated">Log Out</button>
-            </li>
-        </ul>
     </div>
 </template>
 <script setup lang="ts">
@@ -101,7 +102,7 @@ function logout() {
             toggleDropdown()
         },
         onResponseError({ response }) {
-            alertError(unWrapFetchError(response, true))
+            alertError(unWrapFetchError(response, 'none'))
         },
         onRequestError({ error }) {
             alertError(error.message)
@@ -123,17 +124,18 @@ onMounted(() => handleWindowSize)
 
 .dropdown {
     transform: translateY(-100%);
-    z-index: -1;
-    right: 2rem;
+    right: 0;
     top: 3.8rem;
-    isolation: unset;
     opacity: 0;
     transition: transform 0.3s, opacity 0.3s;
     pointer-events: none;
 
+    @media screen and (max-width: 768px) {
+        top: 2.8rem !important;
+    }
+
     &.active {
         transform: translateY(0);
-        z-index: 1000;
         opacity: 1;
         pointer-events: all;
     }

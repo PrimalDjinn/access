@@ -43,8 +43,8 @@ async function submit() {
 <template>
   <Title>Sign Up</Title>
   <div class="wrapper"></div>
-  <div class="border border-sky bg-light/20 rounded-2xl w-[600px] m-auto mt-20 p-10 shadow-md shadow-sky">
-    <form @submit.prevent="submit" class="flex flex-col gap-8">
+  <div class="border border-sky bg-light/20 rounded-2xl max-sm:rounded w-[600px] max-w-[90vw] m-auto mt-20 p-10 shadow-md shadow-sky max-sm:mt-10">
+    <form @submit.prevent="submit" class="flex flex-col gap-8 max-sm:gap-4">
       <div>
         <h2 class="text-lg uppercase font-serif">a11y</h2>
         <h1 class="text-4xl font-sans font-bold">Sign Up</h1>
