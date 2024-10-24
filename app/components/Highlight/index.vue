@@ -4,7 +4,7 @@
             ref="carouselContainer">
             <div
                 class="flex items-center w-10/12 justify-around mt-12 h-auto max-sm:mt-2 max-sm:gap-4 m-auto px-4 max-sm:mx-4 carousel -z-10 max-sm:w-fit" id="carousel_items">
-                <HomeHighlightCard class="mt-5 h-56">
+                <HighlightCard class="mt-5 h-56">
                     <template #icon>
                         <svg width="150" height="150" viewBox="0 0 150 150" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +31,8 @@
                     <template #tagline>
                         Inclusivity for everyone
                     </template>
-                </HomeHighlightCard>
-                <HomeHighlightCard class="-mt-10 h-56 max-sm:mt-5">
+                </HighlightCard>
+                <HighlightCard class="-mt-10 h-56 max-sm:mt-5">
                     <template #icon>
                         <svg width="140" height="140" viewBox="0 0 140 140" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -77,8 +77,8 @@
                     <template #tagline>
                         Attract and retain <br> new customers
                     </template>
-                </HomeHighlightCard>
-                <HomeHighlightCard class="mt-5 h-56">
+                </HighlightCard>
+                <HighlightCard class="mt-5 h-56">
                     <template #icon>
                         <svg width="140" height="140" viewBox="0 0 140 140" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +105,7 @@
                     <template #tagline>
                         Comply with legislation
                     </template>
-                </HomeHighlightCard>
+                </HighlightCard>
             </div>
         </div>
         <div class="flex w-full absolute top-1/2 left-0 justify-between items-center -translate-y-1/2 sm:hidden mt-4">

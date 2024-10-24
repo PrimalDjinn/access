@@ -52,7 +52,7 @@
             </div>
             <ul ref="dropdown"
                 class="absolute border px-10 py-1 dropdown text-white bg-navy/80 mt-1 -mr-0.5 rounded-b-md backdrop-blur-lg">
-                <li class="hover:bg-sky/20 w-full transition-colors py-1">
+                <li class="hover:bg-sky/20 w-full transition-colors py-1 initial">
                     <button @click="logout" v-if="User.isAuthenticated">Log Out</button>
                 </li>
             </ul>
@@ -81,12 +81,17 @@ function handleWindowSize() {
             });
         dropdown.value?.prepend(...dropdownItems);
         collectedDropdownItems = true;
+    } else if (window.innerWidth > 768 && collectedDropdownItems) {
+        dropdown.value?.querySelectorAll('li').forEach((li) => {
+            if (li.classList.contains('initial')) return
+            li.remove();
+        });
+        collectedDropdownItems = false;
     }
 }
 
 function toggleDropdown() {
     if (!dropdown.value) return console.warn('Dropdown not found');
-    handleWindowSize();
     dropdown.value.classList.toggle('active');
 }
 
@@ -110,7 +115,9 @@ function logout() {
     })
 }
 
-onMounted(() => handleWindowSize)
+onMounted(() => {
+    window.matchMedia('(max-width: 768px)').addEventListener('change', handleWindowSize);
+})
 </script>
 <style scoped lang="scss">
 .navbar {

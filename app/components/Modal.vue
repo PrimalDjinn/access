@@ -25,8 +25,8 @@ defineProps({
         </slot>
       </p>
       <div class="flex gap-4 px-4 py-2 justify-between border-t border-gray-300">
-        <button @click="onCancel" class="bg-dark text-white px-8 py-2 rounded-md">Cancel</button>
-        <button @click="onConfirm" class="bg-peach text-white px-8 py-2 rounded-md">Confirm</button>
+        <button @click="onCancel?.()" class="bg-dark text-white px-8 py-2 rounded-md">Cancel</button>
+        <button @click="onConfirm?.()" class="bg-peach text-white px-8 py-2 rounded-md">Confirm</button>
       </div>
     </div>
   </div>

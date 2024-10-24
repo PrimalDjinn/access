@@ -10,7 +10,6 @@
 </template>
 <style scoped lang="scss">
 .icon-container {
-
     svg,
     img {
         width: 100px;

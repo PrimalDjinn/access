@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    if(!User.isAuthenticated) {
+    if(!User.authCookie) {
         abortNavigation()
         return navigateTo('/auth/login')
     }
