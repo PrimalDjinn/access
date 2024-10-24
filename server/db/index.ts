@@ -1,7 +1,9 @@
 import { credentials } from "~~/drizzle.config";
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
+import * as schema from "./drizzle/schema";
 
-const connection = postgres({...credentials, ssl: 'prefer'});
-
-export default drizzle(connection);
+const client = createClient(credentials);
+export default drizzle(client, {
+    schema: schema
+});

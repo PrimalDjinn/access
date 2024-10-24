@@ -1,8 +1,8 @@
 <template>
   <Title>Your A11y</Title>
   <div class="isolate">
-    <div class="z-10 grid mt-44  grid-cols-1 grid-rows-1">
-      <input type="url" v-model="link"
+    <div class="z-10 grid mt-44 grid-cols-1 grid-rows-1 transition-all duration-500" :class="{'mt-5': loading}">
+      <input type="url" v-model="link" @keydown.enter="search" :disabled="loading"
         class="m-auto w-[800px] max-w-[90%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
         @focusin="showPlaceholder = false" @focusout="revealPlaceholder">
       <Transition mode="in-out" name="fade">
@@ -91,9 +91,18 @@ definePageMeta({
 
 const showPlaceholder = ref(true)
 const link = ref('')
+const loading = ref(false)
 
 function revealPlaceholder() {
   if (!link.value) showPlaceholder.value = true
+}
+
+function search(){
+  link.value = link.value.trim()
+  if (!link.value) return
+  loading.value = true
+
+  
 }
 </script>
 <style scoped>
