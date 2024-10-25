@@ -1,13 +1,15 @@
 <script setup lang="ts">
 defineProps({
   show: Boolean,
+  content: String,
+  title: String,
   onConfirm: Function,
   onCancel: Function
 })
 </script>
 
 <template>
-  <div class="z-100 isolate veil w-full fixed top-0 left-0 h-full backdrop-blur-2xl" v-if="show">
+  <div class="z-100 isolate ababwa veil w-full fixed top-0 left-0 h-full backdrop-blur-2xl" v-if="show">
     <div class="modal min-w-[500px] max-w-5/6 rounded-lg fixed left-1/2 transform -translate-x-1/2 mt-20 bg-white border-2 border-dark/20">
       <span class="flex px-4 items-center gap-2 border-b border-gray-300 py-2">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,12 +18,14 @@ defineProps({
               fill="#293241"/>
         </svg>
         <slot name="title">
-          <h1 class="text-2xl font-bold">Modal</h1>
+          <h1 class="text-2xl font-bold">
+            {{ title || "Modal" }}
+          </h1>
         </slot>
       </span>
       <p class="px-5 py-4 text-lg min-h-20 font-mono">
-        <slot name="content">
-          Are you sure you want to continue?
+        <slot>
+          {{ content || "Are you sure you want to proceed?" }}
         </slot>
       </p>
       <div class="flex gap-4 px-4 py-2 justify-between border-t border-gray-300">

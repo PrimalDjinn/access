@@ -13,10 +13,14 @@
     "migrate": "drizzle-kit generate && drizzle-kit push"
   },
   "dependencies": {
+    "@axe-core/puppeteer": "^4.10.0",
     "@libsql/client": "^0.14.0",
     "drizzle-orm": "^0.33.0",
+    "fast-glob": "^3.3.2",
     "google-auth-library": "^9.14.1",
     "nuxt": "^3.13.0",
+    "puppeteer": "^23.6.0",
+    "simple-git": "^3.27.0",
     "ulid": "^2.3.0",
     "uuid": "^10.0.0",
     "vue": "latest",
@@ -28,6 +32,7 @@
     "@electric-sql/pglite": "^0.2.10",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@types/uuid": "^10.0.0",
+    "axe-core": "^4.10.2",
     "drizzle-kit": "^0.24.2",
     "sass-embedded": "^1.79.4"
   }

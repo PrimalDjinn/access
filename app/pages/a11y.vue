@@ -1,7 +1,7 @@
 <template>
   <Title>Your A11y</Title>
-  <div class="isolate">
-    <div class="z-10 grid mt-44 grid-cols-1 grid-rows-1 transition-all duration-500" :class="{'mt-5': loading}">
+  <div class="isolate" ref="root">
+    <div class="z-10 grid mt-44 grid-cols-1 grid-rows-1 transition-all duration-500" :class="{ 'mt-5': loading }">
       <input type="url" v-model="link" @keydown.enter="search" :disabled="loading"
         class="m-auto w-[800px] max-w-[90%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
         @focusin="showPlaceholder = false" @focusout="revealPlaceholder">
@@ -41,6 +41,11 @@
           </span>
         </div>
       </Transition>
+    </div>
+    <div v-for="result in results">
+      <pre>
+        {{ result }}
+      </pre>
     </div>
     <div class="fixed bottom-0 left-0 -z-10">
       <svg width="695" height="565" viewBox="0 0 695 565" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +90,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import { h, render } from "vue"
+import type { AxeResults } from "axe-core"
+
 definePageMeta({
   middleware: 'auth'
 })
@@ -97,13 +105,25 @@ function revealPlaceholder() {
   if (!link.value) showPlaceholder.value = true
 }
 
-function search(){
+const root = ref<HTMLElement | null>(null)
+const Modal = resolveComponent('Modal')
+const results = ref<AxeResults[] | null>(null)
+async function search() {
   link.value = link.value.trim()
   if (!link.value) return
   loading.value = true
 
-  
+  const response = await $fetch<AxeResults | AxeResults[]>(`/api/a11y/assess?q=${link.value}`, {
+    onResponseError({ error }) {
+      alertError(unWrapFetchError(error))
+    }
+  })
+
+  loading.value = false
+  if (!response) return
+  results.value = Array.isArray(response) ? response : [response]
 }
+
 </script>
 <style scoped>
 .custom-shadow {
