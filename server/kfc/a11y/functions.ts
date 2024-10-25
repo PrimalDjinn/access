@@ -1,6 +1,6 @@
 import { simpleGit as git } from "simple-git"
 import { join, sep } from "path";
-import { glob } from "fast-glob";
+import glob from "fast-glob";
 import { unlink } from "fs/promises";
 import puppeteer from "puppeteer";
 import { AxePuppeteer } from "@axe-core/puppeteer";

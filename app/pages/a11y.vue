@@ -115,6 +115,7 @@ async function search() {
 
   const response = await $fetch<AxeResults | AxeResults[]>(`/api/a11y/assess?q=${link.value}`, {
     onResponseError({ error }) {
+      console.error(error)
       alertError(unWrapFetchError(error))
     }
   })

@@ -1,11 +1,13 @@
 import authController from "./auth/controller"
 import usersController from "./users/controller"
+import a11yController from "./a11y/controller"
 import consola from "consola"
 
 const router = createRouter()
 
 router.use("/auth/**", authController)
 router.use("/users/**", usersController)
+router.use("/a11y/**", a11yController)
 
 /** This has to be the last route */
 router.use("/**", defineEventHandler(event => {

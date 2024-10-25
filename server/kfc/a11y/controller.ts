@@ -17,8 +17,8 @@ router.get("/assess", defineEventHandler(async event => {
     const response = await $fetch(data).catch(e => e as Error)
     if (!response || response instanceof Error) return createError({
         statusCode: 400,
-        // @ts-ignore
-        message: response?.message || "Invalid URL"
+        message: response?.message || "Invalid URL",
+        data: response
     })
 
     let results: AxeResults[] | undefined | Error
@@ -27,13 +27,15 @@ router.get("/assess", defineEventHandler(async event => {
         results = await assessGithubA11y(data).catch(e => e as Error)
         if (!results || results instanceof Error) return createError({
             statusCode: 500,
-            message: results?.message || "Failed to get a11y data"
+            message: results?.message || "Failed to get a11y data",
+            data: results
         })
     } else {
         result = await assessA11y(data).catch(e => e as Error)
         if (!result || result instanceof Error) return createError({
             statusCode: 500,
-            message: result?.message || "Failed to get a11y data"
+            message: result?.message || "Failed to get a11y data",
+            data: result
         })
     }
 
