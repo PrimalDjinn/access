@@ -13,15 +13,14 @@ declare global {
             ? OneOf<Rem, Res | OnlyFirst<Head, AllProperties>, AllProperties>
             : Res;
 
-        interface Global {}
+        interface Global {
+            $puppeteer: import("puppeteer").Browser;
+        }
     }
-
-    type OneOf<TypesArray extends any[], Res = never, AllProperties =
-        MergeTypes<TypesArray>> = TypesArray extends [infer Head, ...infer Rem]
-            ? OneOf<Rem, Res | OnlyFirst<Head, AllProperties>, AllProperties>
-            : Res;
     
-    var alert: (message: string, options: NotificationOptions) => void
-    var alertError: (message: string, options?: Pick<NotificationOptions, 'timeout'>) => void
-    var alertSuccess: (message: string, options: Pick<NotificationOptions, 'timeout'>) => void
+    interface Window {
+        alert: (message: string, options: NotificationOptions) => void
+        alertError: (message: string, options?: Pick<NotificationOptions, 'timeout'>) => void
+        alertSuccess: (message: string, options: Pick<NotificationOptions, 'timeout'>) => void
+    }
 }

@@ -17,11 +17,15 @@ router.get("/assess", defineEventHandler(async event => {
     const response = await $fetch(data).catch(e => e as Error)
     if (!response || response instanceof Error) return createError({
         statusCode: 400,
+        // @ts-ignore
         message: response?.message || "Invalid URL",
         data: response
     })
 
-    let results: AxeResults[] | undefined | Error
+    let results: {
+        result?: AxeResults;
+        error?: any;
+    }[] | undefined | Error
     let result: AxeResults | undefined | Error
     if (isGithubUrl(data)) {
         results = await assessGithubA11y(data).catch(e => e as Error)

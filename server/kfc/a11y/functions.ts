@@ -2,7 +2,6 @@ import { simpleGit as git } from "simple-git"
 import { join, sep } from "path";
 import glob from "fast-glob";
 import { unlink } from "fs/promises";
-import puppeteer from "puppeteer";
 import { AxePuppeteer } from "@axe-core/puppeteer";
 
 export function getRepoPathName(url: string) {
@@ -18,25 +17,29 @@ export async function assessGithubA11y(link: string) {
     const fpath = join("/tmp", rpath);
     await git().clone(link, fpath);
     const files = await glob(fpath + "/**/*.html");
-    const results = await Promise.all(files.map(assessFile));
+    const results = await Promise.allSettled(files.map(assessFile)).then((results) => results.map(result => {
+        if (result.status === "fulfilled") return {
+            result: result.value,
+            error: undefined
+        };
+        return {
+            result: undefined,
+            error: result.reason
+        }
+    }))
     unlink(fpath);
     return results;
 }
 
+async function assessFile(file: string) {
+    const url = "file://" + file;
+    return assessA11y(url);
+}
+
 export async function assessA11y(url: string) {
-    const browser = await puppeteer.launch();
+    const browser = $puppeteer;
     const page = await browser.newPage();
     await page.goto(url);
     const results = await new AxePuppeteer(page).analyze();
-    await browser.close();
-    return results;
-}
-
-async function assessFile(file: string) {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto("file://" + file);
-    const results = await new AxePuppeteer(page).analyze();
-    await browser.close();
     return results;
 }
