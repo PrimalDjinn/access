@@ -163,7 +163,7 @@ export default defineNuxtPlugin(() => {
         new Notification(message, options);
     }
 
-    Object.defineProperty(window, 'alert', {
+    Object.defineProperty(window, '$alert', {
         configurable: false,
         enumerable: false,
         writable: false,
@@ -189,6 +189,17 @@ export default defineNuxtPlugin(() => {
             timeout?: number | 'never';
         }) => {
             new Notification(message, { ...options, intensity: 'success' });
+        }
+    });
+
+    Object.defineProperty(window, 'alertInfo', {
+        configurable: false,
+        enumerable: false,
+        writable: false,
+        value: (message: string, options?: {
+            timeout?: number | 'never';
+        }) => {
+            new Notification(message, { ...options, intensity: 'info' });
         }
     });
 

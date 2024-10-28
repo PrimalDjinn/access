@@ -5,13 +5,16 @@ import consola from "consola"
 export const useUser = () => useState<UserState>('user', () => {
     const user = ref({} as UserState)
     const cookie = User.authCookie
-    if(!cookie) return {} as UserState
+    if (!cookie) return {} as UserState
     $fetch<Drizzle.User.select>("/api/users/me", {
         headers: {
             Authorization: `Bearer ${cookie}`
         },
         onRequestError({ error }) {
-            alertError(error?.message || "An unknown error occurred")
+            if (import.meta.client) {
+                window.alertError(error?.message || "An unknown error occurred")
+            }
+            consola.error(error?.message || "An unknown error occurred", error)
         },
         onResponseError({ error }) {
             consola.error(error)

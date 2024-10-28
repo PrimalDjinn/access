@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Drizzle} from "~~/server/db/types";
+import type {Drizzle} from "~~/server/db/types";
 
 const mismatch = ref(false)
 const loading = ref(false)
@@ -11,7 +11,7 @@ const data = reactive({
 })
 
 watch(data, () => {
-  mismatch.value = data.email && data.password1 && data.password1 !== data.password2;
+  mismatch.value = !!(data.email && data.password1 && data.password1 !== data.password2);
 })
 
 async function submit() {
@@ -25,10 +25,10 @@ async function submit() {
       password: data.password1
     },
     onResponseError({response}) {
-      alertError(unWrapFetchError(response, true))
+      window.alertError(unWrapFetchError(response, true))
     },
     onRequestError({error}) {
-      alertError(error.message)
+      window.alertError(error.message)
     },
     async onResponse({response}) {
       if (!response.ok) return

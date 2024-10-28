@@ -107,10 +107,10 @@ function logout() {
             toggleDropdown()
         },
         onResponseError({ response }) {
-            alertError(unWrapFetchError(response, 'none'))
+            window.alertError(unWrapFetchError(response, 'none'))
         },
         onRequestError({ error }) {
-            alertError(error.message)
+            window.alertError(error.message)
         }
     })
 }

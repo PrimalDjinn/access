@@ -15,10 +15,10 @@ async function submit(){
     method: "POST",
     body: data,
     onResponseError({response}){
-      alertError(unWrapFetchError(response, true))
+      window.alertError(unWrapFetchError(response, true))
     },
     onRequestError({error}){
-      alertError(error.message)
+      window.alertError(error.message)
     },
     async onResponse({response}){
       if(!response.ok) return
