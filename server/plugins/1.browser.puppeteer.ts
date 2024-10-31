@@ -5,7 +5,12 @@ declare global {
 }
 
 export default defineNitroPlugin(async app => {
-    const $puppeteer = await puppeteer.launch();
+    const $puppeteer = await puppeteer.launch({
+        defaultViewport: {
+            height: 1080,
+            width: 1920
+        }
+    });
     Object.defineProperty(globalThis, "$puppeteer", {
         value: $puppeteer,
         writable: false,

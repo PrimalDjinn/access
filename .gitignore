@@ -27,3 +27,4 @@ logs
 *.sqlite-journal
 *.sqlite3
 *.sqlite3-journal
+bucket

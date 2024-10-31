@@ -1,7 +1,8 @@
 <template>
   <Title>Your A11y</Title>
   <div class="isolate" ref="root">
-    <div class="z-10 grid mt-44 grid-cols-1 grid-rows-1 transition-all duration-500" :class="{ 'mt-5': loading }">
+    <div class="z-10 grid mt-44 grid-cols-1 grid-rows-1 transition-all duration-500"
+      :class="{ 'mt-5': loading || loaded }">
       <input type="url" v-model="link" @keydown.enter="search" :disabled="loading"
         class="m-auto w-[800px] max-w-[90%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
         @focusin="showPlaceholder = false" @focusout="revealPlaceholder">
@@ -42,10 +43,10 @@
         </div>
       </Transition>
     </div>
-    <div v-for="result in results">
-      <pre>
-        {{ result }}
-      </pre>
+    <div class="w-10/12 h-10/12 bg-sky/30 m-auto mt-5 rounded-lg backdrop-blur" v-if="loaded">
+      <div class="w-10/12 m-auto p-4">
+        <img v-for="result of results" :src="`data:image/png;base64, ${result.screenshot}`" :alt="result.url" class="w-full object-cover aspect-video object-top rounded" />
+      </div>
     </div>
     <div class="fixed bottom-0 left-0 -z-10">
       <svg width="695" height="565" viewBox="0 0 695 565" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,8 +91,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { h, render } from "vue"
-import type { AxeResults } from "axe-core"
+import type { A11yResults } from "~~/types";
 
 definePageMeta({
   middleware: 'auth'
@@ -100,20 +100,20 @@ definePageMeta({
 const showPlaceholder = ref(true)
 const link = ref('')
 const loading = ref(false)
+const loaded = ref(false)
 
 function revealPlaceholder() {
   if (!link.value) showPlaceholder.value = true
 }
 
 const root = ref<HTMLElement | null>(null)
-const Modal = resolveComponent('Modal')
-const results = ref<AxeResults[] | null>(null)
+const results = ref<A11yResults[] | null>(null)
 async function search() {
   link.value = link.value.trim()
   if (!link.value) return
   loading.value = true
 
-  const response = await $fetch<AxeResults | AxeResults[]>(`/api/a11y/assess?q=${link.value}`, {
+  const response = await $fetch<A11yResults | A11yResults[]>(`/api/a11y/assess?q=${link.value}`, {
     onResponseError({ error }) {
       console.error(error)
       window.alertError(unWrapFetchError(error))
@@ -122,6 +122,7 @@ async function search() {
 
   loading.value = false
   if (!response) return
+  loaded.value = true
   results.value = Array.isArray(response) ? response : [response]
 }
 

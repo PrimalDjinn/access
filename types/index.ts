@@ -1,3 +1,5 @@
+import { AxeResults } from "axe-core"
+
 export interface UserState {
     ulid?: string
     email?: string
@@ -12,7 +14,6 @@ export type NotificationOptions = {
 
 export type UserCookie = string | null
 
-
 export interface ValidationError {
     validation?: string;
     code: string;
@@ -22,4 +23,9 @@ export interface ValidationError {
     type?: string;
     inclusive?: boolean;
     exact?: boolean;
+}
+
+
+export type A11yResults = AxeResults & {
+    screenshot: string
 }

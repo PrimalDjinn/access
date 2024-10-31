@@ -3,6 +3,7 @@ import { join, sep } from "path";
 import glob from "fast-glob";
 import { unlink } from "fs/promises";
 import { AxePuppeteer } from "@axe-core/puppeteer";
+import { A11yResults } from "~~/types";
 
 export function getRepoPathName(url: string) {
     return url.split("/").filter((part) => part.trim().length > 0).slice(-2).join(sep);
@@ -40,6 +41,8 @@ export async function assessA11y(url: string) {
     const browser = $puppeteer;
     const page = await browser.newPage();
     await page.goto(url);
-    const results = await new AxePuppeteer(page).analyze();
+    const screenshot = await page.screenshot({ encoding: "base64"});
+    const results = await new AxePuppeteer(page).analyze() as A11yResults;
+    results.screenshot = screenshot;
     return results;
 }
