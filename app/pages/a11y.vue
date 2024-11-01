@@ -43,9 +43,78 @@
         </div>
       </Transition>
     </div>
-    <div class="w-10/12 h-10/12 bg-sky/30 m-auto mt-5 rounded-lg backdrop-blur" v-if="loaded">
-      <div class="w-10/12 m-auto p-4">
-        <img v-for="result of results" :src="`data:image/png;base64, ${result.screenshot}`" :alt="result.url" class="w-full object-cover aspect-video object-top rounded" />
+    <div class="w-10/12 h-10/12 bg-navy/30 m-auto mt-5 pb-12 rounded-lg backdrop-blur" v-if="loaded">
+      <div class="w-11/12 m-auto pt-14">
+        <img v-for="result of results" :src="`data:image/png;base64, ${result.screenshot}`" :alt="result.url"
+          class="w-full object-cover aspect-video object-top rounded mb-4" />
+      </div>
+      <div class="flex">
+        <div class="w-full"></div>
+        <div class="w-full"></div>
+      </div>
+      <div class="bg-sky/50 p-4 w-11/12 m-auto rounded-lg mt-4">
+        <div class="flex bg-navy rounded-md p-1 w-full gap-2 overflow-auto no-scrollbar">
+          <div
+            class="flex p-2 items-center justify-center gap-2 bg-dark/20 ring-peach cursor-pointer hover:ring-1 ring-inset transition-shadow text-white w-full rounded tab-active">
+            <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+              <path
+                d="M6.5 12.75C3.04822 12.75 0.25 9.95175 0.25 6.5C0.25 3.04822 3.04822 0.25 6.5 0.25C9.95175 0.25 12.75 3.04822 12.75 6.5C12.75 9.95175 9.95175 12.75 6.5 12.75ZM6.5 11.5C9.26144 11.5 11.5 9.26144 11.5 6.5C11.5 3.73857 9.26144 1.5 6.5 1.5C3.73857 1.5 1.5 3.73857 1.5 6.5C1.5 9.26144 3.73857 11.5 6.5 11.5ZM5.875 8.375H7.125V9.625H5.875V8.375ZM5.875 3.375H7.125V7.125H5.875V3.375Z"
+                fill="white" />
+            </svg>
+            <span>Critical Issues ({{ criticalIssuesCount }})</span>
+          </div>
+          <div
+            class="flex p-2 bg-dark/20 items-center justify-center gap-2 text-white w-full ring-peach cursor-pointer hover:ring-1 ring-inset rounded transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-[18px]">
+              <path
+                d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 10.5858L14.8284 7.75736L16.2426 9.17157L13.4142 12L16.2426 14.8284L14.8284 16.2426L12 13.4142L9.17157 16.2426L7.75736 14.8284L10.5858 12L7.75736 9.17157L9.17157 7.75736L12 10.5858Z">
+              </path>
+            </svg>
+            <span>Inaplicable Issues ({{ inaplicableissuesCount }})</span>
+          </div>
+          <div
+            class="flex p-2 bg-dark/20 items-center justify-center gap-2 text-white w-full ring-peach cursor-pointer hover:ring-1 ring-inset rounded transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-[18px]">
+              <path
+                d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20ZM15.5355 7.05025L16.9497 8.46447L12 13.4142L10.5858 12L15.5355 7.05025Z">
+              </path>
+            </svg>
+            <span>Incomplete Issues ({{ incompleteIssuesCount }})</span>
+          </div>
+          <div
+            class="flex p-2 items-center justify-center gap-2 text-white w-full bg-dark/20 ring-peach cursor-pointer hover:ring-1 ring-inset rounded transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-[18px]">
+              <path
+                d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM7 12H9C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12H17C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12Z">
+              </path>
+            </svg>
+            <span>Passed Checks ({{ passChecksCount }})</span>
+          </div>
+        </div>
+        <div class="flex w-full items-center gap-2 text-white relative overflow-x-auto">
+          <table class="w-full bg-navy mt-3 table-auto rounded p-2" v-for="result of results">
+            <thead class="text-white rounded uppercase font-mono border-b border-b-white">
+              <tr>
+                <th class="text-center p-2" scope="col">#</th>
+                <th class="text-left p-2" scope="col">Issue</th>
+                <th class="text-left p-2" scope="col">Tags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(listing, index) of result.violations" :title="listing.id" class="hover:bg-dark/10">
+                <td class="text-center">{{ index + 1 }}</td>
+                <td class="p-2">{{ listing.help }}</td>
+                <td>
+                  <div class="grid gap-2 w-40 overflow-auto no-scrollbar grid-flow-col">
+                    <span v-for="tag of listing.tags"
+                      class="px-2 w-max text-sm py-1 bg-gray-300 text-dark font-semibold rounded font-mono">{{ tag
+                      }}</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="fixed bottom-0 left-0 -z-10">
@@ -129,6 +198,39 @@ async function search() {
 onMounted(() => {
   loading.value = false
 })
+
+
+const criticalIssuesCount = computed(() => {
+  if (!results.value) return 0
+  return results.value.reduce((acc, result) => {
+    return acc + result.violations.length
+  }, 0)
+})
+
+const inaplicableissuesCount = computed(() => {
+  if (!results.value) return 0
+  return results.value.reduce((acc, result) => {
+    return acc + result.inapplicable.length
+  }, 0)
+})
+
+const incompleteIssuesCount = computed(() => {
+  if (!results.value) return 0
+  return results.value.reduce((acc, result) => {
+    return acc + result.incomplete.length
+  }, 0)
+})
+
+const passChecksCount = computed(() => {
+  if (!results.value) return 0
+  return results.value.reduce((acc, result) => {
+    return acc + result.passes.length
+  }, 0)
+})
+
+const totalIssuesCount = computed(() => {
+  return criticalIssuesCount.value + inaplicableissuesCount.value + incompleteIssuesCount.value + passChecksCount.value
+})
 </script>
 <style scoped>
 .custom-shadow {
@@ -149,5 +251,9 @@ onMounted(() => {
 .fade-enter-to,
 .fade-leave {
   opacity: 1;
+}
+
+.tab-active {
+  @apply bg-peach;
 }
 </style>
