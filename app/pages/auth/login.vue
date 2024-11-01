@@ -8,26 +8,24 @@ const data = reactive({
 })
 
 async function submit(){
-  await $fetch<{
+  const response = await $fetch<{
     user: Drizzle.User.select,
     token: string
   }>("/api/auth/login", {
     method: "POST",
     body: data,
     onResponseError({response}){
-      window.alertError(unWrapFetchError(response, true))
+      window.alertError(unWrapFetchError(response, 'none'))
     },
     onRequestError({error}){
       window.alertError(error.message)
-    },
-    async onResponse({response}){
-      if(!response.ok) return
-      const data = response._data
-      User.value = data.user
-      User.authToken = data.token
-      await navigateTo("/a11y")
     }
   })
+
+  if(!response) return
+  User.value = response.user
+  User.authToken = response.token
+  await navigateTo("/a11y")
 }
 </script>
 <template>

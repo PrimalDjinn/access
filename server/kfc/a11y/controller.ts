@@ -1,12 +1,14 @@
 import { isGithubUrl, assessGithubA11y, assessA11y } from "./functions"
 import type { AxeResults } from "axe-core"
 import { z } from "zod"
+import {parseURL, stringifyParsedURL} from "ufo"
 
 const router = createRouter()
 
 router.get("/assess", defineEventHandler(async event => {
-    const q = getQuery(event)?.q?.toString().trim()
+    let q = getQuery(event)?.q?.toString().trim()
     const schema = z.string().url()
+    q = stringifyParsedURL(parseURL(q, "https://"))
 
     const { data, error } = schema.safeParse(q)
     if (!data || error) return createError({

@@ -30,7 +30,7 @@
         <Highlight />
     </div>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .wrapper {
     background-image: url('/images/pattern.svg');
 }

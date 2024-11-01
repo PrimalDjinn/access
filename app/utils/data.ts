@@ -64,10 +64,12 @@ function formatErrorMessage(message: any) {
 }
 
 export function unWrapFetchError(response: Response & { _data: any } | any, html?: true | 'none') {
-
     let message = "Unknown error occurred";
+    if (response?.response && response?.response?._data) {
+        response = response.response
+    }
     if (response?._data?.message) {
-        message = formatErrorMessage(response._data.message || response?._data.statusText || response.statusText);
+        message = formatErrorMessage(response?._data?.message || response?._data.statusText || response.statusText);
     } else if (response?.message) {
         message = formatErrorMessage(response.message || response.statusMessage);
     } else {

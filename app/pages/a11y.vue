@@ -99,7 +99,7 @@ definePageMeta({
 
 const showPlaceholder = ref(true)
 const link = ref('')
-const loading = ref(false)
+const loading = ref(true)
 const loaded = ref(false)
 
 function revealPlaceholder() {
@@ -114,7 +114,7 @@ async function search() {
   loading.value = true
 
   const response = await $fetch<A11yResults | A11yResults[]>(`/api/a11y/assess?q=${link.value}`, {
-    onResponseError({ error }) {
+    onResponseError(error) {
       console.error(error)
       window.alertError(unWrapFetchError(error))
     }
@@ -126,6 +126,9 @@ async function search() {
   results.value = Array.isArray(response) ? response : [response]
 }
 
+onMounted(() => {
+  loading.value = false
+})
 </script>
 <style scoped>
 .custom-shadow {

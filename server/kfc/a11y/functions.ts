@@ -36,13 +36,14 @@ async function assessFile(file: string) {
     const url = "file://" + file;
     return assessA11y(url);
 }
-
+ 
 export async function assessA11y(url: string) {
     const browser = $puppeteer;
     const page = await browser.newPage();
-    await page.goto(url);
+    await page.goto(url, {waitUntil: "networkidle2"});
     const screenshot = await page.screenshot({ encoding: "base64"});
     const results = await new AxePuppeteer(page).analyze() as A11yResults;
     results.screenshot = screenshot;
+    page.close();
     return results;
 }

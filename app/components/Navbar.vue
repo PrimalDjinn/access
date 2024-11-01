@@ -29,33 +29,37 @@
                     <NuxtLink to="/contact">Contact</NuxtLink>
                 </li>
             </ul>
-            <div>
-                <div v-if="!User.isAuthenticated">
-                    <NuxtLink
-                        class="bg-navy px-8 max-sm:px-5 py-2 max-sm:py-1.5 rounded-sm text-white font-bold max-sm:hidden dropdown-item"
-                        to="/auth/login">
-                        <span>Login</span>
-                    </NuxtLink>
-                    <div class="sm:hidden bg-navy p-2 rounded text-white" @click="toggleDropdown">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-5">
-                            <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
-                        </svg>
+            <div class="isolate">
+                <div>
+                    <div v-if="!User.isAuthenticated">
+                        <NuxtLink
+                            class="bg-navy px-8 max-sm:px-5 py-2 max-sm:py-1.5 rounded-sm text-white font-bold max-sm:hidden dropdown-item"
+                            to="/auth/login">
+                            <span>Login</span>
+                        </NuxtLink>
+                        <div class="sm:hidden bg-navy p-2 rounded text-white cursor-pointer" @click="toggleDropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-6 h-5">
+                                <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="rounded-xl max-sm:rounded-lg p-[6px] text-white font-bold bg-white border-2 border-navy relative overflow-hidden cursor-pointer"
+                        v-else @click="toggleDropdown">
+                        <img :src="User.profilePicture" alt="Profile Picture"
+                            class="object-cover h-8 max-sm:h-6 w-10 max-sm:w-8 aspect-square opacity-80 grayscale" />
+                        <div
+                            class="absolute w-full h-full bg-navy/15 top-0 left-0 hover:bg-transparent transition-colors">
+                        </div>
                     </div>
                 </div>
-                <div class="rounded-xl max-sm:rounded-lg p-[6px] text-white font-bold bg-white border-2 border-navy relative overflow-hidden cursor-pointer"
-                    v-else @click="toggleDropdown">
-                    <img :src="User.profilePicture" alt="Profile Picture"
-                        class="object-cover h-8 max-sm:h-6 w-10 max-sm:w-8 aspect-square opacity-80 grayscale" />
-                    <div class="absolute w-full h-full bg-navy/15 top-0 left-0 hover:bg-transparent transition-colors">
-                    </div>
-                </div>
+                <ul ref="dropdown"
+                    class="absolute border px-10 py-1 dropdown text-white bg-navy/80 mt-1 -mr-0.5 rounded-b-md backdrop-blur-lg">
+                    <li class="hover:bg-sky/20 w-full transition-colors py-1 initial">
+                        <button @click="logout" v-if="User.isAuthenticated">Log Out</button>
+                    </li>
+                </ul>
             </div>
-            <ul ref="dropdown"
-                class="absolute border px-10 py-1 dropdown text-white bg-navy/80 mt-1 -mr-0.5 rounded-b-md backdrop-blur-lg">
-                <li class="hover:bg-sky/20 w-full transition-colors py-1 initial">
-                    <button @click="logout" v-if="User.isAuthenticated">Log Out</button>
-                </li>
-            </ul>
         </nav>
     </div>
 </template>
@@ -116,6 +120,7 @@ function logout() {
 }
 
 onMounted(() => {
+    handleWindowSize();
     window.matchMedia('(max-width: 768px)').addEventListener('change', handleWindowSize);
 })
 </script>
