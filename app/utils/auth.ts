@@ -33,20 +33,15 @@ export class User {
      */
     static set authToken(token: string | null) {
         const cookie = useCookie<UserCookie>("auth")
-        const state = useUser().value
         if (token) {
             cookie.value = token
-            state.token = token
         } else {
             cookie.value = null
-            state.token = undefined
         }
     }
 
     static get authToken(): string | null | undefined {
-        const token = useUser().value?.token
-        if (!collapseStr(token)) return this.authCookie
-        return token
+        return this.authCookie
     }
 
     /**
@@ -61,13 +56,11 @@ export class User {
     }
 
     static get profilePicture() {
-        const pic = useUser().value?.picture
-        if (!collapseStr(pic)) return '/images/profile.png'
-        return pic
+        return useUser().then(user => user.value.picture || '/images/profile.png')
     }
 
-    static set value(user: Drizzle.User.select | null) {
-        const _user = useUser()
+    static async setUser(user: Drizzle.User.select | null) {
+        const _user = await useUser()
         if (user) {
             _user.value.email = user.email
             _user.value.ulid = user.ulid
@@ -82,7 +75,11 @@ export class User {
         }
     }
 
-    static get value(): UserState {
-        return useUser().value
+    static set value(user: Drizzle.User.select | null) {
+        this.setUser(user)
+    }
+
+    static get value(): Promise<UserState> {
+        return useUser().then(user => user.value)
     }
 }

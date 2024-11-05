@@ -46,7 +46,7 @@
                     </div>
                     <div class="rounded-xl max-sm:rounded-lg p-[6px] text-white font-bold bg-white border-2 border-navy relative overflow-hidden cursor-pointer"
                         v-else @click="toggleDropdown">
-                        <img :src="User.profilePicture" alt="Profile Picture"
+                        <img :src="pp" alt="Profile Picture"
                             class="object-cover h-8 max-sm:h-6 w-10 max-sm:w-8 aspect-square opacity-80 grayscale" />
                         <div
                             class="absolute w-full h-full bg-navy/15 top-0 left-0 hover:bg-transparent transition-colors">
@@ -66,6 +66,8 @@
 <script setup lang="ts">
 const dropdown = ref<HTMLDivElement | null>(null);
 let collectedDropdownItems = false;
+
+const pp = await User.profilePicture
 
 function handleWindowSize() {
     if (window.innerWidth <= 768 && !collectedDropdownItems) {
