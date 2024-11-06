@@ -14,11 +14,8 @@ function highlight(code: string) {
     });
 }
 
-const code = ref("")
-$format(props.node.html).then(formatted => code.value = highlight(formatted)).catch(e => {
-    console.error(e)
-    code.value = highlight(props.node.html)
-})
+
+const code = highlight(await $format(props.node.html).catch(_ => props.node.html))
 </script>
 <template>
     <small style="font-size: 10px;"><span class="uppercase font-bold">
