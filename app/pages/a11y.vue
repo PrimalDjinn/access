@@ -46,8 +46,9 @@
     <Transition name="slow-fade" mode="out-in">
       <div class="w-10/12 h-10/12 bg-navy/30 m-auto mt-6 pb-12 rounded-lg backdrop-blur" v-if="loading || loaded">
         <div class="w-11/12 m-auto pt-14">
-          <img v-for="result of results" :src="`data:image/png;base64, ${result.screenshot}`" :alt="result.url"
-            class="w-full object-cover aspect-video object-top rounded mb-4" v-if="loaded" />
+          <img v-for="response of results" :src="`data:image/png;base64, ${response.result?.screenshot}`"
+            :alt="response.result?.url" class="w-full object-cover aspect-video object-top rounded mb-4"
+            v-if="loaded" />
           <div class="animate-pulse bg-white/50 aspect-video w-[1920px] max-w-full rounded" v-if="loading"></div>
         </div>
         <div class="flex">
@@ -113,7 +114,7 @@
                 <tbody>
                   <template v-for="(listing, index) of listings" class="hover:bg-dark/10">
                     <tr>
-                      <Listing :listing="listing" :index="index" @view-details="showDetails = index"
+                      <Listing :listing="listing" :index="index" @view-details="showDetails = index; showAll = false" :tab="tab"
                         @hide-details="showDetails = -1" />
                     </tr>
                     <Transition name="slide-fade" mode="out-in">
@@ -216,29 +217,29 @@ async function search() {
 
 const criticalIssuesCount = computed(() => {
   if (!results.value) return 0
-  return results.value.reduce((acc, result) => {
-    return acc + result.violations.length
+  return results.value.reduce((acc, response) => {
+    return acc + (response.result?.violations.length || 0)
   }, 0)
 })
 
 const inapplicableIssuesCount = computed(() => {
   if (!results.value) return 0
-  return results.value.reduce((acc, result) => {
-    return acc + result.inapplicable.length
+  return results.value.reduce((acc, response) => {
+    return acc + (response.result?.inapplicable.length || 0)
   }, 0)
 })
 
 const incompleteIssuesCount = computed(() => {
   if (!results.value) return 0
-  return results.value.reduce((acc, result) => {
-    return acc + result.incomplete.length
+  return results.value.reduce((acc, response) => {
+    return acc + (response.result?.incomplete.length || 0)
   }, 0)
 })
 
 const passChecksCount = computed(() => {
   if (!results.value) return 0
-  return results.value.reduce((acc, result) => {
-    return acc + result.passes.length
+  return results.value.reduce((acc, response) => {
+    return acc + (response.result?.passes.length || 0)
   }, 0)
 })
 
@@ -254,13 +255,13 @@ const listings = computed(() => {
   if (!results.value) return []
   switch (tab.value) {
     case 'critical':
-      return results.value.flatMap(result => result.violations)
+      return results.value.flatMap(result => result.result?.violations)
     case 'inapplicable':
-      return results.value.flatMap(result => result.inapplicable)
+      return results.value.flatMap(result => result.result?.inapplicable)
     case 'incomplete':
-      return results.value.flatMap(result => result.incomplete)
+      return results.value.flatMap(result => result.result?.incomplete)
     case 'pass':
-      return results.value.flatMap(result => result.passes)
+      return results.value.flatMap(result => result.result?.passes)
     default:
       return []
   }
@@ -270,7 +271,15 @@ const showDetails = ref(-1)
 watch(tab, () => {
   showDetails.value = -1
 })
-const showAll = computed(() => listings.value.length < 10)
+const _showAll = ref(true)
+const showAll = computed({
+  get: () => {
+    return _showAll.value && (listings.value.length <= 10 && showDetails.value === -1)
+  },
+  set: (value: boolean) => {
+    _showAll.value = value
+  }
+})
 </script>
 <style scoped>
 .custom-shadow {

@@ -34,7 +34,7 @@ class Notification {
 
         const icon = this.createIcon();
         const messageElement = document.createElement('p');
-        messageElement.classList.add('text-dark');
+        messageElement.classList.add('text-dark', 'overflow-ellipsis', 'overflow-hidden');
         messageElement.innerHTML = this.message;
 
         contentWrapper.appendChild(icon);

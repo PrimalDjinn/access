@@ -3,7 +3,7 @@ import type { NodeResult, Result } from 'axe-core';
 
 
 defineProps<{
-    listing: Result,
+    listing?: Result,
     tab: "incomplete" | "inapplicable" | "critical" | "pass"
 }>();
 
@@ -21,7 +21,7 @@ function checkResult(node: NodeResult) {
                 <span v-else-if="tab === 'pass'" class="text-green-500 font-bolder">Passing</span>
                 elements
             </p>
-            <div v-for="(node, index) of listing.nodes" :key="index" class="p-2 border-b w-full border-dark/30 detail">
+            <div v-for="(node, index) of listing?.nodes" :key="index" class="p-2 border-b w-full border-dark/30 detail">
                 <div class="bg-white text-navy rounded-sm py-0.5 pb-2 px-2 m-auto mb-2 overflow-auto">
                     <ListingCode :node="node" />
                 </div>
@@ -29,7 +29,7 @@ function checkResult(node: NodeResult) {
                     <div class="flex gap-1 items-center font-bold text-sm uppercase mt-3 mb-2">
                         <span>Summary</span>
                         <span>
-                            <NuxtLink :external="true" :to="listing.helpUrl" target="_blank"
+                            <NuxtLink :external="true" :to="listing?.helpUrl" target="_blank"
                                 class="top-1 right-2 hover:text-peach cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="w-4 h-4">

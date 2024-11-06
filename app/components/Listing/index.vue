@@ -2,8 +2,9 @@
 import type { Result } from "axe-core"
 const button = ref<HTMLDivElement | null>(null)
 defineProps<{
-    listing: Result,
-    index: number
+    listing?: Result,
+    index: number,
+    tab: "incomplete" | "inapplicable" | "critical" | "pass"
 }>()
 
 const emits = defineEmits<{
@@ -13,26 +14,25 @@ const emits = defineEmits<{
 
 let detailsShown = false
 function toggleDetails() {
-    if (detailsShown) {
-        detailsShown = false
+    if (!detailsShown) {
         emits('view-details')
         button.value?.classList.add('rotate')
     } else {
-        detailsShown = true
         emits('hide-details')
         button.value?.classList.remove('rotate')
     }
+    detailsShown = !detailsShown
 }
 </script>
 
 <template>
     <td class="text-center">{{ index + 1 }}</td>
-    <td class="p-2">{{ listing.help }}</td>
+    <td class="p-2">{{ listing?.help }}</td>
     <td>
-        <ListingTags :tags="listing.tags" />
+        <ListingTags :tags="listing?.tags" />
     </td>
     <td>
-        <div class="justify-center flex items-center" @click="toggleDetails">
+        <div class="justify-center flex items-center" @click="toggleDetails" v-if="tab !== 'inapplicable'">
             <div class="flex w-fit bg-white rounded-full p-2 cursor-pointer transition-transform" ref="button">
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

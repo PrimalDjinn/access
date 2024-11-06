@@ -2,6 +2,7 @@ import { isGithubUrl, assessGithubA11y, assessA11y } from "./functions"
 import type { AxeResults } from "axe-core"
 import { z } from "zod"
 import {parseURL, stringifyParsedURL} from "ufo"
+import { A11yResults } from "~~/types"
 
 const router = createRouter()
 
@@ -24,11 +25,8 @@ router.get("/assess", defineEventHandler(async event => {
         data: response
     })
 
-    let results: {
-        result?: AxeResults;
-        error?: any;
-    }[] | undefined | Error
-    let result: AxeResults | undefined | Error
+    let results: A11yResults[] | undefined | Error
+    let result: A11yResults | undefined | Error
     if (isGithubUrl(data)) {
         results = await assessGithubA11y(data).catch(e => e as Error)
         if (!results || results instanceof Error) return createError({

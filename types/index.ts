@@ -26,6 +26,12 @@ export interface ValidationError {
 }
 
 
-export type A11yResults = AxeResults & {
-    screenshot: string
+export type A11yResults = {
+    result: AxeResults & {
+        screenshot: string
+    },
+    error?: Error | string
+} | {
+    result?: undefined
+    error: Error | string
 }
