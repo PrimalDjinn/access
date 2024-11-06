@@ -56,7 +56,7 @@ export class User {
     }
 
     static get profilePicture() {
-        return useUser().then(user => user.value.picture || '/images/profile.png')
+        return useUser().then(user => user.value?.picture || '/images/profile.png')
     }
 
     static async setUser(user: Drizzle.User.select | null) {

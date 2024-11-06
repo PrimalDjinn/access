@@ -8,5 +8,6 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   css: [
     '~/assets/scss/base.scss',
+    '~/assets/css/hljs.css'
   ]
 })
