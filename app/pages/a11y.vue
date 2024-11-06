@@ -204,8 +204,9 @@ async function search() {
     onResponseError(error) {
       console.error(error)
       window.alertError(unWrapFetchError(error))
+      loaded.value = false
     }
-  })
+  }).catch(console.error)
 
   loading.value = false
   if (!response) return
