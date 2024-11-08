@@ -5,7 +5,7 @@
       :class="{ 'mt-5': loading || loaded }">
       <input type="url" v-model="link" @keydown.enter="search" :disabled="loading"
         class="m-auto w-[800px] max-w-[90%] custom-shadow h-[60px] focus:outline-none focus:outline-2 outline-sky border border-sky/30 font-mulish rounded-md px-4 py-2 col-start-1 row-start-1"
-        @focusin="showPlaceholder = false" @focusout="revealPlaceholder" @input="showPlaceholder = false">
+        @focusin="showPlaceholder = false;" @focusout="revealPlaceholder" @input="showPlaceholder = false">
       <Transition mode="in-out" name="fade">
         <div
           class="m-auto h-[60px] w-[800px] max-w-[90%] pointer-events-none flex font-semibold items-center px-4 top-0 left-0 col-start-1 row-start-1 text-dark/50 max-sm:text-sm"
@@ -51,12 +51,30 @@
             v-if="loaded" />
           <div class="animate-pulse bg-white/50 aspect-video w-[1920px] max-w-full rounded" v-if="loading"></div>
         </div>
-        <div class="flex">
-          <div class="w-full"></div>
-          <div class="w-full"></div>
+        <div class="flex w-11/12 gap-4 m-auto" v-if="loaded">
+          <div class="w-full flex bg-dark p-8 rounded-md">
+            <div class="m-auto w-10/12 border-[#E0EAFC] border rounded-t-3xl rounded-b">
+              <h1 class="flex justify-center items-center w-full gap-2 p-4 font-serif text-3xl">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13 25.5C6.09644 25.5 0.5 19.9035 0.5 13C0.5 6.09644 6.09644 0.5 13 0.5C19.9035 0.5 25.5 6.09644 25.5 13C25.5 19.9035 19.9035 25.5 13 25.5ZM13 23C18.5229 23 23 18.5229 23 13C23 7.47715 18.5229 3 13 3C7.47715 3 3 7.47715 3 13C3 18.5229 7.47715 23 13 23ZM14.25 11.125V16.75H15.5V19.25H10.5V16.75H11.75V13.625H10.5V11.125H14.25ZM14.875 8C14.875 9.03554 14.0355 9.875 13 9.875C11.9645 9.875 11.125 9.03554 11.125 8C11.125 6.96446 11.9645 6.125 13 6.125C14.0355 6.125 14.875 6.96446 14.875 8Z"
+                    fill="#E0EAFC" />
+                </svg>
+                <span class="font-semibold text-[#E0EAFC]">{{ rating.hero }}</span>
+              </h1>
+              <p class="text-center px-6 text-balance py-2 bg-[#E0EAFC] text-dark">
+                <span>{{ rating.message }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="m-auto bg-white w-full flex justify-center rounded-md">
+              <Pie :data="pieData" />
+            </div>
+          </div>
         </div>
-        <div class="bg-sky/50 p-4 w-11/12 m-auto rounded-lg mt-4" v-if="loading || loaded">
-          <div class="flex bg-navy rounded-md p-1 w-full gap-2 overflow-auto no-scrollbar">
+        <div class="bg-navy/50 p-4 w-11/12 m-auto rounded-lg mt-4" v-if="loading || loaded">
+          <div class="flex bg-dark rounded-md p-1 w-full gap-2 overflow-auto no-scrollbar">
             <div @click="tab = 'critical'" :class="{ 'tab-active': tab === 'critical' }"
               class="flex p-2 items-center justify-center gap-2 bg-dark/20 ring-peach cursor-pointer hover:ring-1 ring-inset transition-shadow text-white w-full rounded">
               <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
@@ -114,8 +132,8 @@
                 <tbody>
                   <template v-for="(listing, index) of listings" class="hover:bg-dark/10">
                     <tr>
-                      <Listing :listing="listing" :index="index" @view-details="showDetails = index; showAll = false" :tab="tab"
-                        @hide-details="showDetails = -1" />
+                      <Listing :listing="listing" :index="index" @view-details="showDetails = index; showAll = false"
+                        :tab="tab" @hide-details="showDetails = -1" />
                     </tr>
                     <Transition name="slide-fade" mode="out-in">
                       <tr v-if="(showDetails == index) || showAll">
@@ -178,6 +196,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { parseURL } from "ufo";
 import type { A11yResults } from "~~/types";
 
 definePageMeta({
@@ -198,6 +217,8 @@ const results = ref<A11yResults[] | null>(null)
 
 async function search() {
   link.value = link.value.trim()
+  results.value = null
+
   if (!link.value) return
   loading.value = true
 
@@ -244,7 +265,58 @@ const passChecksCount = computed(() => {
 })
 
 const totalIssuesCount = computed(() => {
-  return criticalIssuesCount.value + inapplicableIssuesCount.value + incompleteIssuesCount.value + passChecksCount.value
+  return criticalIssuesCount.value + incompleteIssuesCount.value + passChecksCount.value
+})
+
+const rating = computed(() => {
+  if (!results.value) return {
+    hero: '🤔',
+    message: 'No data to show',
+    score: 0
+  }
+
+  const score = Math.floor(passChecksCount.value / totalIssuesCount.value * 100)
+  const hostname = parseURL(link.value, "https://").host
+  switch (!!score) {
+    case (score < 50):
+      return {
+        hero: 'Little Compliance 😳',
+        score,
+        message: `Site ${hostname} has a low compliance score. There are some serious compliance issues.`
+      }
+    case (score < 75):
+      return {
+        hero: 'Good Compliance 😊',
+        score,
+        message: `Site ${hostname} has a good compliance score. There are some compliance issues.`
+      }
+    case (score < 90):
+      return {
+        hero: 'Great Compliance 🥳',
+        score,
+        message: `Site ${hostname} has a great compliance score. There are a few compliance issues.`
+      }
+    default:
+      return {
+        hero: 'Fully Compliant 🎉',
+        score,
+        message: `Site ${hostname} has an excellent compliance score. There are no compliance issues.`
+      }
+  }
+})
+
+const pieData = computed<{
+  name: string,
+  value: number
+}[]>(() => {
+  if (!results.value) return []
+  const data = [
+    { name: 'Critical', value: criticalIssuesCount.value },
+    { name: 'Inapplicable', value: inapplicableIssuesCount.value },
+    { name: 'Incomplete', value: incompleteIssuesCount.value },
+    { name: 'Pass', value: passChecksCount.value }
+  ]
+  return data
 })
 
 const tab = ref<

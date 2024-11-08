@@ -29,6 +29,9 @@ importers:
       nuxt:
         specifier: ^3.13.0
         version: 3.13.2(@libsql/client@0.14.0)(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(@libsql/client@0.14.0)(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))
+      nuxt-echarts:
+        specifier: ^0.2.3
+        version: 0.2.3(echarts@5.5.1)(magicast@0.3.5)(rollup@4.23.0)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -2283,6 +2286,9 @@ packages:
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
+  echarts@5.5.1:
+    resolution: {integrity: sha512-Fce8upazaAXUVUVsjgV6mBnGuqgO+JNDlcgF79Dksy4+wgGpQB2lmYoO4TSweFg/mZITdpGHomw/cNBJZj1icA==}
+
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
@@ -3228,6 +3234,11 @@ packages:
     resolution: {integrity: sha512-MhG4QR6D95jQxhnwKfdKXulZ8Yqy1nbpwbotbxY5IcabOzpEeTB8hYn2BFkmYdMUB0no81qpv2ldZmVCT9UsnQ==}
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
+
+  nuxt-echarts@0.2.3:
+    resolution: {integrity: sha512-V2GaAMqwBAvzzE4WC1xANcft7Bunk24+ug19E25jC0C03a+ZgZt9jeZTmHyqjb5dwg5QI5p5tqY0cFuG4CBCwg==}
+    peerDependencies:
+      echarts: ^5.5.1
 
   nuxt@3.13.2:
     resolution: {integrity: sha512-Bjc2qRsipfBhjXsBEJCN+EUAukhdgFv/KoIR5HFB2hZOYRSqXBod3oWQs78k3ja1nlIhAEdBG533898KJxUtJw==}
@@ -4185,6 +4196,9 @@ packages:
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
@@ -4597,6 +4611,9 @@ packages:
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
+  zrender@5.6.0:
+    resolution: {integrity: sha512-uzgraf4njmmHAbEUxMJ8Oxg+P3fT04O+9p7gY+wJRVxo8Ge+KmYv0WJev945EH4wFuc4OY2NLXz46FZrWS9xJg==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -6633,6 +6650,11 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
+  echarts@5.5.1:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.6.0
+
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.30: {}
@@ -7824,6 +7846,16 @@ snapshots:
 
   nuxi@3.14.0: {}
 
+  nuxt-echarts@0.2.3(echarts@5.5.1)(magicast@0.3.5)(rollup@4.23.0):
+    dependencies:
+      '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.23.0)
+      echarts: 5.5.1
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
+      - webpack-sources
+
   nuxt@3.13.2(@libsql/client@0.14.0)(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(@libsql/client@0.14.0)(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1)):
     dependencies:
       '@nuxt/devalue': 2.0.2
@@ -8927,6 +8959,8 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
+  tslib@2.3.0: {}
+
   tslib@2.7.0: {}
 
   tsscmp@1.0.6: {}
@@ -9337,5 +9371,9 @@ snapshots:
       readable-stream: 4.5.2
 
   zod@3.23.8: {}
+
+  zrender@5.6.0:
+    dependencies:
+      tslib: 2.3.0
 
   zwitch@2.0.4: {}

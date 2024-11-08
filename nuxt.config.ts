@@ -5,9 +5,13 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-echarts'],
   css: [
     '~/assets/scss/base.scss',
     '~/assets/css/hljs.css'
-  ]
+  ],
+  echarts: {
+    components: ['TooltipComponent'],
+    charts: ['PieChart'],
+  }
 })

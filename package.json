@@ -20,6 +20,7 @@
     "google-auth-library": "^9.14.1",
     "highlight.js": "^11.10.0",
     "nuxt": "^3.13.0",
+    "nuxt-echarts": "^0.2.3",
     "prettier": "^3.3.3",
     "puppeteer": "^23.6.0",
     "shiki": "^1.22.2",
