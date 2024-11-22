@@ -26,9 +26,9 @@ function toggleDetails() {
 </script>
 
 <template>
-    <td class="text-center">{{ index + 1 }}</td>
+    <td class="text-center align-top pt-2.5">{{ index + 1 }}</td>
     <td class="p-2">{{ listing?.help }}</td>
-    <td>
+    <td class="max-sm:hidden">
         <ListingTags :tags="listing?.tags" />
     </td>
     <td>

@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'nuxt-echarts'],
   css: [
     '~/assets/scss/base.scss',
-    '~/assets/css/hljs.css'
   ],
   echarts: {
     components: ['TooltipComponent'],

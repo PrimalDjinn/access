@@ -70,7 +70,7 @@ let collectedDropdownItems = false;
 const pp = await User.profilePicture
 
 function handleWindowSize() {
-    if (window.innerWidth <= 768 && !collectedDropdownItems) {
+    if (window.innerWidth <= 800 && !collectedDropdownItems) {
         const dropdownItems = Array.from(document.querySelectorAll('.dropdown-item'))
             .map((item) => {
                 item = item.cloneNode(true) as HTMLElement;
@@ -87,7 +87,7 @@ function handleWindowSize() {
             });
         dropdown.value?.prepend(...dropdownItems);
         collectedDropdownItems = true;
-    } else if (window.innerWidth > 768 && collectedDropdownItems) {
+    } else if (window.innerWidth > 800 && collectedDropdownItems) {
         dropdown.value?.querySelectorAll('li').forEach((li) => {
             if (li.classList.contains('initial')) return
             li.remove();
@@ -123,7 +123,7 @@ function logout() {
 
 onMounted(() => {
     handleWindowSize();
-    window.matchMedia('(max-width: 768px)').addEventListener('change', handleWindowSize);
+    window.matchMedia('(max-width: 800px)').addEventListener('change', handleWindowSize);
 })
 </script>
 <style scoped lang="scss">
@@ -131,7 +131,7 @@ onMounted(() => {
     filter: drop-shadow(0px 10px 10px rgba(90, 169, 230, 0.1));
     height: 65px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 800px) {
         height: 50px;
     }
 }
@@ -144,7 +144,7 @@ onMounted(() => {
     transition: transform 0.3s, opacity 0.3s;
     pointer-events: none;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 800px) {
         top: 2.8rem !important;
     }
 

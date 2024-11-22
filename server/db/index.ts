@@ -4,6 +4,4 @@ import { createClient } from "@libsql/client";
 import * as schema from "./drizzle/schema";
 
 const client = createClient(credentials);
-export default drizzle(client, {
-    schema: schema
-});
+export default drizzle(client, { schema });

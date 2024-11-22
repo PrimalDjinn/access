@@ -15,13 +15,13 @@ function checkResult(node: NodeResult) {
     <td colspan="4" v-if="tab !== 'inapplicable'">
         <hr class="m-auto w-[90%] mb-3 border-sky/30">
         <div class="m-auto w-[90%] bg-dark/20 rounded">
-            <p class="uppercase text-sm px-2 py-1 font-semibold">
-                <span v-if="tab === 'critical'" class="text-red-500 font-bolder">Failing</span>
-                <span v-else-if="tab === 'incomplete'" class="text-yellow-500 font-bolder">Incomplete</span>
-                <span v-else-if="tab === 'pass'" class="text-green-500 font-bolder">Passing</span>
-                elements
-            </p>
-            <div v-for="(node, index) of listing?.nodes" :key="index" class="p-2 border-b w-full border-dark/30 detail">
+            <div v-for="(node, index) of listing?.nodes" :key="index" class="p-2 pb-4 w-full border-dark/30 detail">
+                <p class="uppercase text-sm pb-2 font-semibold">
+                    <span v-if="tab === 'critical'" class="text-red-500 font-bolder">Failing</span>
+                    <span v-else-if="tab === 'incomplete'" class="text-yellow-500 font-bolder">Incomplete</span>
+                    <span v-else-if="tab === 'pass'" class="text-green-500 font-bolder">Passing</span>
+                    element
+                </p>
                 <div class="bg-white text-navy rounded-sm py-0.5 pb-2 px-2 m-auto mb-2 overflow-auto">
                     <ListingCode :node="node" />
                 </div>
@@ -44,14 +44,15 @@ function checkResult(node: NodeResult) {
                         <table class="table-fixed bg-white text-dark rounded-sm p-1 w-full">
                             <thead class="border-b border-dark">
                                 <tr>
-                                    <th class="w-1/5 p-1 pl-4 text-left">Impact</th>
+                                    <th class="w-1/5 p-1 pl-4 text-left max-sm:pl-1 break-words hyphens-auto">Impact
+                                    </th>
                                     <th class="w-4/5 border-l p-1 border-dark text-left">Description</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(failure, index) of checkResult(node)" :key="index"
                                     class="border-sky/40 border-b">
-                                    <td class="p-1 pl-4 text-left">
+                                    <td class="p-1 pl-4 max-sm:pl-1 text-left break-words hyphens-auto align-top">
                                         <span v-if="failure.impact === 'critical'" class="text-red-500">Critical</span>
                                         <span v-else-if="failure.impact === 'serious'"
                                             class="text-yellow-500">Serious</span>
@@ -70,11 +71,12 @@ function checkResult(node: NodeResult) {
     </td>
 </template>
 <style scoped>
-.detail:not(:last-child) {
-    @apply border-t border-sky/30 mb-2;
+.detail:not(:first-child) {
+    @apply border-t-4 border-sky/30;
 }
 
 .detail:last-child {
     margin-bottom: 1rem;
+    border-bottom: none;
 }
 </style>

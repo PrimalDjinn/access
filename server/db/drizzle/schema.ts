@@ -1,4 +1,4 @@
-import { sqliteTable, text, foreignKey,  } from "drizzle-orm/sqlite-core"
+import { sqliteTable, text, foreignKey } from "drizzle-orm/sqlite-core"
 import { sql } from "drizzle-orm"
 
 export const user = sqliteTable("users", {
@@ -13,7 +13,7 @@ export const token = sqliteTable("tokens", {
 	ulid: text("ulid", { length: 26 }).primaryKey().notNull(),
 	userUlid: text("user_ulid", { length: 26 }).notNull(),
 	value: text("value").notNull(),
-	createdAt:text('timestamp').notNull().default(sql`(current_timestamp)`),
+	createdAt: text('timestamp').notNull().default(sql`(current_timestamp)`),
 },
 	(table) => {
 		return {

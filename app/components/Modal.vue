@@ -38,7 +38,7 @@ defineProps({
 
 <style scoped>
 .veil {
-  background: radial-gradient(66.53% 131.56% at 70.49% 47.56%, rgba(61, 90, 128, 0.2) 0%, rgba(243, 106, 62, 0.2) 100%);;
+  background: radial-gradient(66.53% 131.56% at 70.49% 47.56%, rgba(61, 90, 128, 0.2) 0%, rgba(243, 106, 62, 0.2) 100%);
 }
 
 .modal {
