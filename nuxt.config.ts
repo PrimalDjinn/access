@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-echarts'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-echarts', '@nuxt/scripts'],
   css: [
     '~/assets/scss/base.scss',
   ],

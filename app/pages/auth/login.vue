@@ -34,7 +34,7 @@ async function submit(){
   <div class="border border-sky bg-light/20 rounded-2xl max-sm:rounded w-[600px] max-w-[90vw] m-auto mt-20 p-10 shadow-md shadow-sky max-sm:mt-10">
     <form @submit.prevent="submit" class="flex flex-col gap-8 max-sm:gap-4">
       <div>
-        <h2 class="text-lg uppercase font-serif">Access.</h2>
+        <h2 class="text-lg uppercase font-serif">A11Y</h2>
         <h1 class="text-4xl font-sans font-bold">Login</h1>
       </div>
       <div class="flex flex-col gap-1">

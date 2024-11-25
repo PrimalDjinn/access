@@ -6,7 +6,7 @@
                 <svg class="h-12 max-sm:h-9" viewBox="0 0 65 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M0 5C0 2.23858 2.23858 0 5 0H35C51.5685 0 65 13.4315 65 30C65 46.5685 51.5685 60 35 60H5C2.23858 60 0 57.7614 0 55V5Z"
-                        fill="#3D5A80" />
+                        fill="#98c1d9" />
                 </svg>
             </div>
             <ul
@@ -19,7 +19,7 @@
                 </li>
                 <li>
                     <NuxtLink to="/">
-                        <span class="uppercase text-3xl">a11y.</span>
+                        <span class="uppercase text-3xl">a11y</span>
                     </NuxtLink>
                 </li>
                 <li class="dropdown-item max-sm:hidden">
