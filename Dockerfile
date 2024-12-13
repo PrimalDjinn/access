@@ -10,6 +10,8 @@ RUN pnpm install
 
 COPY . .
 
+RUN touch db.sqlite && chmod 447 db.sqlite && pnpm migrate
+
 RUN pnpm build \
     pnpm prune
 
