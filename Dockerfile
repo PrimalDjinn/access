@@ -12,11 +12,11 @@ COPY . .
 
 RUN touch db.sqlite && chmod 447 db.sqlite && pnpm migrate
 
-RUN pnpm build \
+RUN pnpm run build \
     pnpm prune
 
 ENV NITRO_PORT=3000
 
 EXPOSE 3000
 
-CMD [ "pnpm", "start" ]
+CMD [ "node", ".output/server/index.mjs" ]
