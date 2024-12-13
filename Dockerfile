@@ -1,7 +1,5 @@
 FROM node:20.18-alpine
 
-WORKDIR /a11y
-
 COPY package.json pnpm-lock.yaml ./
 
 RUN corepack enable
