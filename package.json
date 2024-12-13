@@ -6,9 +6,9 @@
     "build": "nuxt build",
     "dev": "nuxt dev --host",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "pnpm build && pnpm migrate && nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "pnpm build && pnpm migrate && node .output/server/index.mjs",
+    "start": "node .output/server/index.mjs",
     "introspect": "drizzle-kit introspect",
     "migrate": "drizzle-kit generate && drizzle-kit push"
   },
