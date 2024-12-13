@@ -14,9 +14,6 @@ importers:
       '@libsql/client':
         specifier: ^0.14.0
         version: 0.14.0
-      '@libsql/win32-x64-msvc':
-        specifier: 0.5.0-pre.4
-        version: 0.5.0-pre.4
       '@nuxt/scripts':
         specifier: ^0.9.5
         version: 0.9.5(@nuxt/devtools@1.5.1(rollup@4.23.0)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))(vue@3.5.10)(webpack-sources@3.2.3))(@unocss/webpack@0.62.4(rollup@4.23.0)(webpack@5.96.1(esbuild@0.23.1)))(@vue/compiler-core@3.5.10)(ioredis@5.4.1)(magicast@0.3.5)(nuxt@3.13.2(@libsql/client@0.14.0)(@parcel/watcher@2.4.1)(@types/node@22.7.4)(drizzle-orm@0.33.0(@electric-sql/pglite@0.2.10)(@libsql/client@0.14.0)(postgres@3.4.4))(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.23.0)(sass-embedded@1.79.4)(terser@5.34.1)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))(webpack-sources@3.2.3))(postcss@8.4.47)(rollup@4.23.0)(vite@5.4.8(@types/node@22.7.4)(sass-embedded@1.79.4)(terser@5.34.1))(vue@3.5.10)(webpack-sources@3.2.3)(webpack@5.96.1(esbuild@0.23.1))
@@ -1154,11 +1151,6 @@ packages:
 
   '@libsql/win32-x64-msvc@0.4.6':
     resolution: {integrity: sha512-Q0axn110zDNELfkEog3Nl8p9BU4eI/UvgaHevGyOiSDN7s0KPfj0j6jwVHk4oz3o/d/Gg3DRIxomZ4ftfTOy/g==}
-    cpu: [x64]
-    os: [win32]
-
-  '@libsql/win32-x64-msvc@0.5.0-pre.4':
-    resolution: {integrity: sha512-ts/SNrEpOo3TLdFI9FdmBFFsbMnpzl3j9X0XxfPhPBQ5YmSOvFPiB+fCEsqs/TsZF1JcmexuaORrm6CAyfXYdg==}
     cpu: [x64]
     os: [win32]
 
@@ -6081,8 +6073,6 @@ snapshots:
 
   '@libsql/win32-x64-msvc@0.4.6':
     optional: true
-
-  '@libsql/win32-x64-msvc@0.5.0-pre.4': {}
 
   '@mapbox/node-pre-gyp@1.0.11':
     dependencies:
