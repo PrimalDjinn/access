@@ -2,7 +2,7 @@ import { isGithubUrl, assessGithubA11y, assessA11y } from "./functions"
 import type { AxeResults } from "axe-core"
 import { z } from "zod"
 import {parseURL, stringifyParsedURL} from "ufo"
-import { A11yResults } from "~~/types"
+import { A11yResults } from "~~/shared/types";
 
 const router = createRouter()
 

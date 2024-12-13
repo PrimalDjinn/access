@@ -39,7 +39,8 @@ async function submit() {
 }
 </script>
 <template>
-  <Title>Sign Up</Title>
+ <div>
+   <Title>A11y | Sign Up</Title>
   <div class="wrapper"></div>
   <div class="border border-sky bg-light/20 rounded-2xl max-sm:rounded w-[600px] max-w-[90vw] m-auto mt-20 p-10 shadow-md shadow-sky max-sm:mt-10">
     <form @submit.prevent="submit" class="flex flex-col gap-8 max-sm:gap-4">
@@ -118,6 +119,7 @@ async function submit() {
       </p>
     </form>
   </div>
+ </div>
 </template>
 <style scoped>
 .wrapper {

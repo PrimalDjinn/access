@@ -1,6 +1,6 @@
 <template>
-    <Title>Home</Title>
     <div class="wrapper">
+        <Title>A11y | Home</Title>
         <p class="font-sans font-bold text-8xl text-center mt-16 max-sm:mt-12 text-dark max-sm:text-5xl">
             Accessibility <br> Solutions for <br> Web <span class="text-peach">Compliance</span>
         </p>

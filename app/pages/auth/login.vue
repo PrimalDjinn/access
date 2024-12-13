@@ -29,7 +29,8 @@ async function submit(){
 }
 </script>
 <template>
-  <Title>Login</Title>
+  <div>
+    <Title>A11y | Login</Title>
   <div class="wrapper"></div>
   <div class="border border-sky bg-light/20 rounded-2xl max-sm:rounded w-[600px] max-w-[90vw] m-auto mt-20 p-10 shadow-md shadow-sky max-sm:mt-10">
     <form @submit.prevent="submit" class="flex flex-col gap-8 max-sm:gap-4">
@@ -102,6 +103,7 @@ async function submit(){
         <NuxtLink to="/auth/register" class="text-dark font-bold hover:underline">Register</NuxtLink>
       </p>
     </form>
+  </div>
   </div>
 </template>
 <style scoped>

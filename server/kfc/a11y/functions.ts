@@ -4,7 +4,7 @@ import glob from "fast-glob";
 import { rm } from "fs/promises";
 import { AxePuppeteer } from "@axe-core/puppeteer";
 import { AxeResults } from "axe-core";
-import { A11yResults } from "~~/types";
+import { A11yResults } from "~~/shared/types";
 
 export function getRepoPathName(url: string) {
     return url.split("/").filter((part) => part.trim().length > 0).slice(-2).join(sep);
