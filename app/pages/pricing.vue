@@ -7,17 +7,15 @@
 				<div class="-mx-4 flex flex-wrap">
 					<div class="w-full px-4">
 						<div class="ml-4 mb-[60px] max-w-[510px]">
-							<span class="mb-2 block text-lg uppercase font-serif">
-								A11Y
-							</span>
+							<span class="mb-2 block text-lg uppercase font-serif"> A11Y </span>
 							<h2
 								class="mb-3 font-sans font-bold text-6xl text-left max-sm:mt-6 text-dark max-sm:text-5xl"
 							>
 								Our <span class="text-peach">Pricing</span> Plan
 							</h2>
 							<p>
-								There are 2 variations of passages of A11Y available but
-								the majority have suffered alteration in some form.
+								There are 2 variations of passages of A11Y available but the
+								majority have suffered alteration in some form.
 							</p>
 						</div>
 					</div>
@@ -39,7 +37,7 @@
 							</p>
 							<div class="mb-9 flex flex-col gap-[14px]">
 								<p class="text-base text-body-color">1 User</p>
-								<p class="text-base text-body-color">5 Reports</p>
+								<p class="text-base text-body-color">2 Reports Per Day</p>
 								<p class="text-base text-body-color">Lifetime access</p>
 								<p class="text-base text-body-color">Free updates</p>
 								<p class="text-base text-body-color">Use on 1 (one) project</p>
@@ -317,19 +315,17 @@
 							</div>
 						</div>
 					</div>
-                    <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+					<div class="w-full px-4 md:w-1/2 lg:w-1/3">
 						<div
 							class="relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 border-stroke bg-white py-10 px-8 shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-[50px]"
 						>
-							<span class="mb-3 block text-lg font-semibold text-primary">
-								Pro
-							</span>
+							<span class="mb-3 block text-lg font-semibold text-primary"> Pro </span>
 							<h2 class="mb-5 text-[42px] font-bold text-dark">
 								<span>$259</span>
 								<span class="text-base font-medium text-body-color"> / year </span>
 							</h2>
 							<p class="mb-8 border-b border-stroke pb-8 text-base text-body-color">
-								Perfect for using non commercial use.
+								Perfect for using Professional and Commercial use.
 							</p>
 							<div class="mb-9 flex flex-col gap-[14px]">
 								<p class="text-base text-body-color">Enterprize Access</p>
@@ -616,7 +612,7 @@
 		</section>
 	</div>
 </template>
-<style>
+<style scoped>
 .wrapper {
 	padding-bottom: 8rem;
 	background: radial-gradient(100.76% 179.14% at -2.4% -2.78%, #ffffff 25.3%, #e0fbfc 100%);

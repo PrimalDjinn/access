@@ -1,6 +1,7 @@
 import type { Drizzle } from "~~/server/db/types";
 import type { UserState } from "~~/shared/types";
 import consola from "consola";
+import { isDevelopment } from "../../server/utils/env";
 
 export const useUser = async () => {
 	const { data } = await useAsyncState<UserState>("user", async () => {
@@ -25,8 +26,8 @@ export const useUser = async () => {
 				if (!response.ok) return;
 				User.value = response._data;
 			},
-		}).catch(e => null);
-		if(!data) return {} as UserState
+		}).catch((e) => null);
+		if (!data) return {} as UserState;
 		const user = {
 			email: data.email,
 			token: cookie,

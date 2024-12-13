@@ -1,9 +1,9 @@
 <template>
-	<div class="w-10/12 m-auto flex flex-col">
+	<div class="w-10/12 m-auto flex flex-col max-sm:w-full">
 		<Title>A11y | Contact</Title>
 		<div class="wrapper"></div>
 		<div
-			class="w-6/12 border border-sky bg-light/20 rounded-2xl max-sm:rounded max-w-[90vw] m-auto mt-20 p-10 shadow-md shadow-sky max-sm:mt-10"
+			class="w-6/12 border border-sky bg-light/20 rounded-2xl max-sm:rounded max-w-[90vw] m-auto mt-20 p-10 shadow-md shadow-sky max-sm:mt-10 max-sm:p-5 max-sm:w-full"
 		>
 			<h2 class="text-lg uppercase font-serif ml-2">A11Y</h2>
 			<h1

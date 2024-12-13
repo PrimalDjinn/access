@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full m-auto flex flex-col max-sm:w-full wrapper pb-36 absolute top-0 pt-20">
+	<div class="w-full m-auto flex flex-col max-sm:w-full pb-36 absolute top-0 pt-20" style="background: radial-gradient(100.76% 179.14% at -2.4% -2.78%, #FFFFFF 25.3%, #E0FBFC 100%)">
 		<div class="w-full">
 			<Title>A11y | About</Title>
 			<div
@@ -219,5 +219,10 @@
 	.content h3 {
 		font-size: 1.1em;
 	}
+}
+
+.shadow-md.shadow-sky{
+  box-shadow: 2px 4px 10px rgba(152, 193, 217, 0.25);
+  backdrop-filter: blur(10px);
 }
 </style>
