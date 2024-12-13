@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full m-auto flex flex-col max-sm:w-full wrapper pb-36 absolute top-0 pt-20">
 		<section
-			class="w-10/12 m-auto border border-sky bg-light/20 rounded-2xl max-sm:rounded max-w-[90vw] p-10 shadow-md shadow-sky max-sm:mt-10 max-sm:w-full max-sm:p-5 mt-20"
+			class="w-9/12 m-auto border border-sky bg-light/20 rounded-2xl max-sm:rounded max-w-[90vw] p-10 shadow-md shadow-sky max-sm:mt-10 max-sm:w-full max-sm:p-5 mt-20"
 		>
 			<div class="mx-auto">
 				<div class="-mx-4 flex flex-wrap">
@@ -16,7 +16,7 @@
 								Our <span class="text-peach">Pricing</span> Plan
 							</h2>
 							<p>
-								There are many variations of passages of A11Y available but
+								There are 2 variations of passages of A11Y available but
 								the majority have suffered alteration in some form.
 							</p>
 						</div>
