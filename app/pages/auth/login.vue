@@ -24,10 +24,10 @@ async function submit(){
   })
 
   if(!response) return
+  loading.value = false
   User.value = response.user
   User.authToken = response.token
   await navigateTo("/a11y")
-  loading.value = false
 }
 </script>
 <template>
