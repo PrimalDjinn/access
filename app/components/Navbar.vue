@@ -101,8 +101,8 @@ function toggleDropdown() {
     dropdown.value.classList.toggle('active');
 }
 
-function logout() {
-    $fetch("/api/auth/logout", {
+async function logout() {
+    await $fetch("/api/auth/logout", {
         headers: {
             Authorization: `Bearer ${User.authToken}`
         },
@@ -119,6 +119,7 @@ function logout() {
             window.alertError(error.message)
         }
     })
+    navigateTo("/auth/login")
 }
 
 onMounted(() => {
