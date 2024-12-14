@@ -31,7 +31,8 @@ RUN pnpm install
 
 COPY . .
 
-RUN touch db.sqlite && chmod 447 db.sqlite && pnpm migrate
+ENV DATABASE_URL=file:./db.sqlite3
+RUN touch db.sqlite3 && chmod 447 db.sqlite3 && pnpm migrate
 
 RUN pnpm build \
     && pnpm prune
@@ -40,8 +41,10 @@ ENV NITRO_PORT=3000
 
 EXPOSE 3000
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-RUN chown appuser:appgroup db.sqlite
+
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup --home /home/appuser appuser
+RUN chown -R appuser:appgroup /home/appuser
+RUN chown appuser:appgroup db.sqlite3
 USER appuser
 
 CMD [ "pnpm", "start" ]
