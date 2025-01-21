@@ -1,6 +1,6 @@
 <template>
 	<div class="isolate" ref="root">
-		<Title>Your A11y</Title>
+		<Title>Accessibility Solutions</Title>
 		<div
 			class="z-10 grid mt-44 grid-cols-1 grid-rows-1 transition-all duration-500"
 			:class="{ 'mt-5': loading || loaded }"

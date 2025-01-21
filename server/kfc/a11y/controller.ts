@@ -16,15 +16,7 @@ router.get("/assess", defineEventHandler(async event => {
         statusCode: 400,
         message: error?.message || "Missing query parameter 'q'. It should be a URL"
     })
-
-    const response = await $fetch(data).catch(e => e as Error)
-    if (!response || response instanceof Error) return createError({
-        statusCode: 400,
-        // @ts-ignore
-        message: response?.message || "Invalid URL",
-        data: response
-    })
-
+    
     let results: A11yResults[] | undefined | Error
     let result: A11yResults | undefined | Error
     if (isGithubUrl(data)) {
