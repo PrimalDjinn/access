@@ -37,7 +37,7 @@ const { onLoaded } = useScript(
 onMounted(() => {
 	onLoaded((calendar) => {
 		calendar.schedulingButton.load({
-			url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ300wldBWhoIE6szLGoakkzHLCl3qHJiSpmlEaDEv0f6bcBWhfFI8NRnzpsy-xII1rK_tJAKeVP?gv=true",
+			url: useRuntimeConfig().public.googleCalendarBookLink,
 			color: "#3d5a80",
 			label: "",
 			target: button.value,
