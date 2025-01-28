@@ -1,9 +1,132 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "9b325fe7-48ec-4c8e-8b04-69d2299bb718",
+  "id": "293c9861-93d5-4688-b4d4-0ce08c9851e4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "jobs": {
+      "name": "jobs",
+      "columns": {
+        "job_id": {
+          "name": "job_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "job_status": {
+          "name": "job_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "job_type": {
+          "name": "job_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "jobs_user_id_users_ulid_fk": {
+          "name": "jobs_user_id_users_ulid_fk",
+          "tableFrom": "jobs",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "ulid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "reports": {
+      "name": "reports",
+      "columns": {
+        "report_id": {
+          "name": "report_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "accessibility_score": {
+          "name": "accessibility_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "date": {
+          "name": "date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "reports_user_id_users_ulid_fk": {
+          "name": "reports_user_id_users_ulid_fk",
+          "tableFrom": "reports",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "ulid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "tokens": {
       "name": "tokens",
       "columns": {
@@ -39,6 +162,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "tokens_user_ulid_users_ulid_fk": {
+          "name": "tokens_user_ulid_users_ulid_fk",
+          "tableFrom": "tokens",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_ulid"
+          ],
+          "columnsTo": [
+            "ulid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "tokens_user_ulid_fkey": {
           "name": "tokens_user_ulid_fkey",
           "tableFrom": "tokens",
