@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --host",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "pnpm build && pnpm migrate && nuxt preview",
+    "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "node --env-file=.env .output/server/index.mjs",
+    "start": "pnpm migrate && node .output/server/index.mjs",
     "introspect": "drizzle-kit introspect",
     "migrate": "drizzle-kit generate && drizzle-kit push"
   },
