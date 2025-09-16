@@ -1,8 +1,8 @@
-FROM node:20.18-slim
+FROM node:22-bullseye
 
 WORKDIR /ally
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-*.yaml ./
 
 RUN corepack enable
 
