@@ -7,13 +7,13 @@ COPY package.json pnpm-*.yaml ./
 RUN corepack enable
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    bash \
     chromium \
     chromium-sandbox \
-    fonts-noto \
-    ca-certificates \
-    libnss3 \
+    chromium-common \
+    fonts-liberation \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libasound2 \
     libatk-bridge2.0-0 \
     libx11-xcb1 \
     libxcomposite1 \
@@ -22,7 +22,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcups2 \
     libpangocairo-1.0-0 \
     libgbm1 \
-    libasound2 \
+    libnss3 \
+    libnspr4 \
+    libdrm2 \
+    ca-certificates \
     dumb-init \
     && rm -rf /var/lib/apt/lists/*
 
