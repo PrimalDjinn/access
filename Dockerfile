@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     bash \
     chromium \
+    chromium-sandbox \
     fonts-noto \
     ca-certificates \
     libnss3 \
